@@ -96,6 +96,49 @@ namespace car_system.Controllers
             // Invalid model state
             return BadRequest(new { Message = "Invalid model state", Errors = ModelState.Values.SelectMany(v => v.Errors) });
         }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/api/User/ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordView model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user == null)
+                {
+                    return NotFound(new { Message = "User not found" });
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.RefreshSignInAsync(user);
+                    // Password change successful
+                    return Ok(new { Message = "Password change successful" });
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    // Password change failed
+                    return BadRequest(new { Message = "Password change failed", Errors = ModelState.Values.SelectMany(v => v.Errors) });
+                }
+            }
+
+            // Invalid model state
+            return BadRequest(new { Message = "Invalid model state", Errors = ModelState.Values.SelectMany(v => v.Errors) });
+        }
     }
 
 }

@@ -11,12 +11,22 @@ namespace car_system.Controllers.Services
         private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
 
-        public AccountService(UserManager<Users> userManager, SignInManager<Users> signInManager)
+        public AccountService(UserManager<Users> userManager, SignInManager<Users> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
+        public async Task ChangePassword(Users user, string currentPassword, string newPassword)
+        {
+            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException("Failed to change password.");
+            }
+        }
         public async Task<Users> LoginUser(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
