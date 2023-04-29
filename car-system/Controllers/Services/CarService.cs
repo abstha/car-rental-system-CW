@@ -17,9 +17,14 @@ namespace car_system.Controllers.Services
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCar(int carId)
+        public async Task DeleteCar(int CarId)
         {
-            throw new NotImplementedException();
+            var car = await _context.Cars.FindAsync(CarId);
+            if (car != null)
+            {
+                _context.Cars.Remove(car);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<List<Cars>> GetAllCars()
@@ -27,9 +32,9 @@ namespace car_system.Controllers.Services
             return await _context.Cars.ToListAsync();
         }
 
-        public Task<Cars> GetCarById(int carId)
+        public async Task<Cars> GetCarById(int CarId)
         {
-            throw new NotImplementedException();
+            return await _context.Cars.FindAsync(CarId);
         }
 
         public Task<List<Cars>> SearchCars(string searchTerm)

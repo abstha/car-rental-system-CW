@@ -1,0 +1,27 @@
+﻿@using car_system.Models.Entities
+@model Cars
+
+<h1>Delete Car</h1>
+
+<p>Are you sure you want to delete this car?</p>
+
+<table>
+    <tr>
+        <th>Condition</th>
+        <td>@Model.Condition</td>
+    </tr>
+    <tr>
+        <th>Model</th>
+        <td>@Model.Model</td>
+    </tr>
+    <tr>
+        <th>Availability</th>
+        <td>@Model.Availability</td>
+    </tr>
+    <!-- Display more properties as needed -->
+</table>
+
+<form method="post" action="@Url.Action("DeleteConfirmed", "Car", new { id = Model.CarId })">
+    <button type="submit">Confirm Delete</button>
+    <a href="@Url.Action("Index", "Car")">Cancel</a>
+</form>

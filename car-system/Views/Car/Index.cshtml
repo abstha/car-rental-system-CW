@@ -24,6 +24,12 @@
                     <td>@car.Model</td>
                     <td>@car.Availability</td>
                     <!-- Display more properties as needed -->
+                    <td>
+                        <a href="@Url.Action("Edit", "Car", new { id = car.CarId })">Edit</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", "Car", new { id = car.CarId })">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>
