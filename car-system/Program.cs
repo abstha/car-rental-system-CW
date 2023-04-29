@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Swagger generator
@@ -15,14 +16,27 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=LAPTOP-ERS22E1S\\SQLEXPRESS;Initial Catalog=coursework-database;Integrated Security=True;Pooling=False;Encrypt=False"));
 
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ICarService, CarService>();
 
 
 builder.Services.AddIdentity<Users, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -46,6 +60,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors();
 
 app.UseAuthorization();
 

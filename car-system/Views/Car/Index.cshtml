@@ -1,0 +1,35 @@
+﻿@using car_system.Models.Entities
+@model List<Cars>
+
+<h1>Car List</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>image</th>
+                <th>Condition</th>
+                <th>Model</th>
+                <th>Availability</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <th><img src="@car.Picture"/></th>
+                    <td>@car.Condition</td>
+                    <td>@car.Model</td>
+                    <td>@car.Availability</td>
+                    <!-- Display more properties as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No cars found.</p>
+}
