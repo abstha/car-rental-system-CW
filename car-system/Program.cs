@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IRentalService, RentalService>();
 
 
 builder.Services.AddIdentity<Users, IdentityRole>()

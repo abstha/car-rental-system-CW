@@ -16,9 +16,21 @@ namespace car_system.Controllers.Data
             base.OnModelCreating(modelBuilder);
 
             // Custom configurations, if any
+            // Configure the relationships
+            modelBuilder.Entity<RentalRequest>()
+                .HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.UserId);
+
+            modelBuilder.Entity<RentalRequest>()
+                .HasOne(r => r.Car)
+                .WithMany()
+                .HasForeignKey(r => r.CarRented);
         }
 
         public DbSet<Cars> Cars { get; set; }
+        public DbSet<RentalRequest> RentalRequests { get; set; }
+
         // You don't need to add DbSet for Users, as it's already included in IdentityDbContext<Users>
     }
 
