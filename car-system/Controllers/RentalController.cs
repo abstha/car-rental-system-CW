@@ -1,5 +1,5 @@
 ﻿using car_system.Controllers.Services;
-using car_system.Models.Entities;
+using car_system.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace car_system.Controllers
@@ -16,8 +16,7 @@ namespace car_system.Controllers
         }
 
         [HttpPost]
-    
-        public async Task<IActionResult> CreateRentalRequest([FromBody] RentalRequest rentalRequest)
+        public async Task<IActionResult> CreateRentalRequest([FromBody] RentalRequestDTO rentalRequest)
         {
             try
             {
@@ -31,7 +30,6 @@ namespace car_system.Controllers
         }
 
         [HttpGet("{rentalId}")]
-     
         public async Task<IActionResult> GetRentalRequestById(int rentalId)
         {
             try
@@ -49,8 +47,6 @@ namespace car_system.Controllers
         }
 
         [HttpGet]
-     
-
         public async Task<IActionResult> GetAllRentalRequests()
         {
             try
@@ -64,10 +60,7 @@ namespace car_system.Controllers
             }
         }
 
-
         [HttpGet("user/{userId}")]
-       
-
         public async Task<IActionResult> GetRentalRequestsByUserId(string userId)
         {
             try
@@ -82,8 +75,6 @@ namespace car_system.Controllers
         }
 
         [HttpGet("car/{carId}")]
-    
-
         public async Task<IActionResult> GetRentalRequestsByCarId(int carId)
         {
             try
@@ -98,8 +89,6 @@ namespace car_system.Controllers
         }
 
         [HttpPut("{rentalId}")]
-        
-
         public async Task<IActionResult> UpdateRentalRequestStatus(int rentalId, [FromBody] string status)
         {
             try
@@ -117,8 +106,6 @@ namespace car_system.Controllers
         }
 
         [HttpDelete("{rentalId}")]
-        
-
         public async Task<IActionResult> DeleteRentalRequest(int rentalId)
         {
             try

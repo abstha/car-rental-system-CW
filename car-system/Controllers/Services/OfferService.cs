@@ -1,4 +1,5 @@
-﻿using car_system.Models.Entities;
+﻿using car_system.Models;
+using car_system.Models.Entities;
 
 namespace car_system.Controllers.Services
 {
@@ -21,9 +22,19 @@ namespace car_system.Controllers.Services
             return _offers;
         }
 
-        public void CreateOffer(Offers offer)
+        public void CreateOffer(AddOfferView offerView)
         {
-            offer.OfferID = GenerateOfferId();
+            var offer = new Offers
+            {
+                OfferID = GenerateOfferId(),
+                StartDate = offerView.StartDate,
+                EndDate = offerView.EndDate,
+                Type = offerView.Type,
+                Value = offerView.Value,
+                OfferDescription = offerView.OfferDescription,
+                CreatedByUserID = offerView.CreatedByUserID
+            };
+
             _offers.Add(offer);
         }
 

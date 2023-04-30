@@ -1,4 +1,5 @@
 ﻿using car_system.Controllers.Data;
+using car_system.Models.DTO;
 using car_system.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ namespace car_system.Controllers.Services
             _dbContext = dbContext;
         }
 
-        public async Task<RentalRequest> CreateRentalRequest(string userId, int carId, DateTime rentalDate)
+        public async Task<RentalRequestDTO> CreateRentalRequest(string userId, int carId, DateTime rentalDate)
         {
             var rentalRequest = new RentalRequest
             {
@@ -26,27 +27,35 @@ namespace car_system.Controllers.Services
             _dbContext.RentalRequests.Add(rentalRequest);
             await _dbContext.SaveChangesAsync();
 
-            return rentalRequest;
+            return MapToDTO(rentalRequest);
         }
 
-        public async Task<RentalRequest> GetRentalRequestById(int rentalId)
+        public async Task<RentalRequestDTO> GetRentalRequestById(int rentalId)
         {
-            return await _dbContext.RentalRequests.FindAsync(rentalId);
+            var rentalRequest = await _dbContext.RentalRequests.FindAsync(rentalId);
+
+            return rentalRequest != null ? MapToDTO(rentalRequest) : null;
         }
 
-        public async Task<List<RentalRequest>> GetAllRentalRequests()
+        public async Task<List<RentalRequestDTO>> GetAllRentalRequests()
         {
-            return await _dbContext.RentalRequests.ToListAsync();
+            var rentalRequests = await _dbContext.RentalRequests.ToListAsync();
+
+            return rentalRequests.Select(r => MapToDTO(r)).ToList();
         }
 
-        public async Task<List<RentalRequest>> GetRentalRequestsByUserId(string userId)
+        public async Task<List<RentalRequestDTO>> GetRentalRequestsByUserId(string userId)
         {
-            return await _dbContext.RentalRequests.Where(r => r.UserId == userId).ToListAsync();
+            var rentalRequests = await _dbContext.RentalRequests.Where(r => r.UserId == userId).ToListAsync();
+
+            return rentalRequests.Select(r => MapToDTO(r)).ToList();
         }
 
-        public async Task<List<RentalRequest>> GetRentalRequestsByCarId(int carId)
+        public async Task<List<RentalRequestDTO>> GetRentalRequestsByCarId(int carId)
         {
-            return await _dbContext.RentalRequests.Where(r => r.CarRented == carId).ToListAsync();
+            var rentalRequests = await _dbContext.RentalRequests.Where(r => r.CarRented == carId).ToListAsync();
+
+            return rentalRequests.Select(r => MapToDTO(r)).ToList();
         }
 
         public async Task<bool> UpdateRentalRequestStatus(int rentalId, string status)
@@ -73,6 +82,18 @@ namespace car_system.Controllers.Services
             await _dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        private RentalRequestDTO MapToDTO(RentalRequest rentalRequest)
+        {
+            return new RentalRequestDTO
+            {
+                RentalId = rentalRequest.RentalId,
+                UserId = rentalRequest.UserId,
+                CarRented = rentalRequest.CarRented,
+                RentalDate = rentalRequest.RentalDate,
+                RentalStatus = rentalRequest.RentalStatus
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using car_system.Controllers.Services;
+using car_system.Models;
 using car_system.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,17 +50,15 @@ namespace car_system.Controllers
         // POST: api/offers
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-
-        public IActionResult Create(Offers offer)
+        public IActionResult Create(AddOfferView offerView)
         {
             if (ModelState.IsValid)
             {
-                _offerService.CreateOffer(offer);
+                _offerService.CreateOffer(offerView);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(offer);
+            return View(offerView);
         }
 
         // GET: api/offers/edit/{id}

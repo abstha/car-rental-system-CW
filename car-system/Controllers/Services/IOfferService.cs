@@ -1,4 +1,5 @@
-﻿using car_system.Models.Entities;
+﻿using car_system.Models;
+using car_system.Models.Entities;
 using System;
 
 namespace car_system.Controllers.Services
@@ -7,7 +8,7 @@ namespace car_system.Controllers.Services
     {
         Offers GetOfferById(int offerId);
         List<Offers> GetAllOffers();
-        void CreateOffer(Offers offer);
+        void CreateOffer(AddOfferView offerView);
         void UpdateOffer(Offers offer);
         void DeleteOffer(int offerId);
     }
