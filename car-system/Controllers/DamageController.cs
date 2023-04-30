@@ -18,7 +18,7 @@ namespace car_system.Controllers
 
         // GET: api/damages
         [HttpGet]
-        [Route("GetAllDamages")]
+
         public IActionResult GetAllDamages()
         {
             var damages = _damageService.GetAllDamages();
@@ -27,7 +27,7 @@ namespace car_system.Controllers
 
         // GET: api/damages/5
         [HttpGet("{id}")]
-        [Route("GetDamageByID")]
+      
         public IActionResult GetDamageById(int id)
         {
             var damage = _damageService.GetDamageById(id);
@@ -42,7 +42,7 @@ namespace car_system.Controllers
 
         // POST: api/damages
         [HttpPost]
-        [Route("CreateDamage")]
+
         public IActionResult CreateDamage(DamageView damage)
         {
             if (ModelState.IsValid)
@@ -65,7 +65,7 @@ namespace car_system.Controllers
 
         // PUT: api/damages/5
         [HttpPut("{id}")]
-        [Route("UpdateDamage")]
+
         public IActionResult UpdateDamage(int id, DamageView damage)
         {
             if (id != damage.DamageID)
@@ -94,7 +94,7 @@ namespace car_system.Controllers
 
         // DELETE: api/damages/5
         [HttpDelete("{id}")]
-        [Route("DeleteDamage")]
+
         public IActionResult DeleteDamage(int id)
         {
             var damage = _damageService.GetDamageById(id);

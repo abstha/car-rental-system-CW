@@ -16,7 +16,7 @@ namespace car_system.Controllers
         }
 
         [HttpPost]
-        [Route("CreateRentalRequest")]
+    
         public async Task<IActionResult> CreateRentalRequest([FromBody] RentalRequest rentalRequest)
         {
             try
@@ -31,7 +31,7 @@ namespace car_system.Controllers
         }
 
         [HttpGet("{rentalId}")]
-        [Route("GetRentalRequestByID")]
+     
         public async Task<IActionResult> GetRentalRequestById(int rentalId)
         {
             try
@@ -49,7 +49,7 @@ namespace car_system.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllRentalRequest")]
+     
 
         public async Task<IActionResult> GetAllRentalRequests()
         {
@@ -66,7 +66,7 @@ namespace car_system.Controllers
 
 
         [HttpGet("user/{userId}")]
-        [Route("GetRentalRequestByUserID")]
+       
 
         public async Task<IActionResult> GetRentalRequestsByUserId(string userId)
         {
@@ -82,7 +82,7 @@ namespace car_system.Controllers
         }
 
         [HttpGet("car/{carId}")]
-        [Route("GetRentalRequestByCarID")]
+    
 
         public async Task<IActionResult> GetRentalRequestsByCarId(int carId)
         {
@@ -98,7 +98,7 @@ namespace car_system.Controllers
         }
 
         [HttpPut("{rentalId}")]
-        [Route("UpdateRentalRequestStatus")]
+        
 
         public async Task<IActionResult> UpdateRentalRequestStatus(int rentalId, [FromBody] string status)
         {
@@ -117,7 +117,7 @@ namespace car_system.Controllers
         }
 
         [HttpDelete("{rentalId}")]
-        [Route("DeleteRentalRequest")]
+        
 
         public async Task<IActionResult> DeleteRentalRequest(int rentalId)
         {
