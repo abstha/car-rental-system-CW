@@ -88,8 +88,8 @@ namespace car_system.Controllers
             return View(car);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [Route("/api/Cars/Delete")]
+        [HttpPost]
+        [Route("/api/Cars/DeleteConfirmed/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _carService.DeleteCar(id);

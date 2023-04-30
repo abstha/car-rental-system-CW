@@ -28,7 +28,7 @@
                         <a href="@Url.Action("Edit", "Car", new { id = car.CarId })">Edit</a>
                     </td>
                     <td>
-                        <a href="@Url.Action("Delete", "Car", new { id = car.CarId })">Delete</a>
+                        <a asp-action="DeleteConfirmed" asp-route-id="@car.CarId" onclick="return confirm('Are you sure you want to delete this car?')">Delete</a>
                     </td>
                 </tr>
             }

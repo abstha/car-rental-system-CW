@@ -17,9 +17,13 @@ namespace car_system.Models.Entities
         public string Condition { get; set; }
 
         [Display(Name = "CarAvailability")]
-        public string Availability { get; set; }
+        public Boolean Availability { get; set; }
 
         [Display(Name = "CarPrice")]
         public int RentPrice { get; set; }
+
+        // Navigation properties
+        public virtual ICollection<RentalRequest> RentalRequests { get; set; }
+       
     }
 }

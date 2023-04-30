@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430090611_addedModels")]
+    partial class addedModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,37 +200,6 @@ namespace car_system.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("car_system.Models.Entities.Damages", b =>
-                {
-                    b.Property<int>("DamageID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DamageID"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("VerifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DamageID");
-
-                    b.HasIndex("CarID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Damages");
-                });
-
             modelBuilder.Entity("car_system.Models.Entities.Offers", b =>
                 {
                     b.Property<int>("OfferID")
@@ -346,21 +318,21 @@ namespace car_system.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "b3e159f7-324f-4bbe-af27-a18b13e21838",
+                            ConcurrencyStamp = "903c7acb-8b18-4065-9cfc-2eb2bf144a41",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "ea3480ad-8ac8-4045-a3b4-f0f5bc32f1f5",
+                            ConcurrencyStamp = "788cb95f-2a38-46e6-a1a3-2bf0e95cddef",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "3b83b525-c6c7-45a2-b24c-9bdac97ae516",
+                            ConcurrencyStamp = "c7f861ce-c19f-4b0e-842c-b49eb62e8d61",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -505,25 +477,6 @@ namespace car_system.Migrations
                     b.HasOne("car_system.Models.Entities.Users", null)
                         .WithMany("Attachments")
                         .HasForeignKey("UsersId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("car_system.Models.Entities.Damages", b =>
-                {
-                    b.HasOne("car_system.Models.Entities.Cars", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("car_system.Models.Entities.Users", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
 
                     b.Navigation("User");
                 });

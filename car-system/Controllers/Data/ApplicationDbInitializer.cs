@@ -23,7 +23,7 @@ namespace car_system.Controllers.Data
                             Model = "Camaro",
                             Picture = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fphotos-images%2Fchevrolet-camaro.html&psig=AOvVaw3cJdVUpoaSXyrAMzovtFuB&ust=1682572959752000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKD7uO7mxv4CFQAAAAAdAAAAABAE",
                             Condition = "good",
-                            Availability = "yes",
+                            Availability = true,
                             RentPrice = 12000
                         },
                         new Cars()
@@ -31,7 +31,7 @@ namespace car_system.Controllers.Data
                             Model = "Mustang",
                             Picture = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFord_Mustang&psig=AOvVaw2lT1FZEUvXdTqXj54A5bC-&ust=1682573075410000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMifxqXnxv4CFQAAAAAdAAAAABAE",
                             Condition = "good",
-                            Availability = "yes",
+                            Availability = true,
                             RentPrice = 15000
                         },
                         new Cars()
@@ -39,7 +39,7 @@ namespace car_system.Controllers.Data
                             Model = "Gt-R",
                             Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCF6I7qJ2l75x1MG9z5oDIc6qV5wrUEIvAZWNsoSCROQ&s",
                             Condition = "good",
-                            Availability = "yes",
+                            Availability = true,
                             RentPrice = 200000
                         },
                     });
