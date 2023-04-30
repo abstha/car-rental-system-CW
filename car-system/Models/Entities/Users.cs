@@ -13,6 +13,6 @@ namespace car_system.Models.Entities
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual ICollection<Offers> Offers { get; set; }
 
-        public virtual ICollection<UserRole> Roles { get; set; }
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
     }
 }

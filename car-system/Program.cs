@@ -22,9 +22,11 @@ builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IDamageService, DamageService>();
 
 
-builder.Services.AddIdentity<Users, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+builder.Services.AddIdentity<Users, UserRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<RoleManager<UserRole>>();
 
 
 // Add services to the container.

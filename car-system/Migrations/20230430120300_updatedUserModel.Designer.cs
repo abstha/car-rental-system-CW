@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430120300_updatedUserModel")]
+    partial class updatedUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,25 +24,6 @@ namespace car_system.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -365,21 +349,21 @@ namespace car_system.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "0cf85811-9f7d-4ca8-916a-d5a97a068328",
+                            ConcurrencyStamp = "c9ecd2d0-f42d-488f-9555-72f9a92e10c4",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "4b94b029-b9ef-4ba0-952e-2d0759807d2e",
+                            ConcurrencyStamp = "9d09e32a-5969-4867-8414-4d3b89ec5b47",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "c035e603-7ded-46a4-891e-6102b2adaa0c",
+                            ConcurrencyStamp = "00a6ec98-0eba-46d7-95ee-803df1d8189d",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

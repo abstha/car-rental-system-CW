@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430113651_AddedIdentityDB")]
+    partial class AddedIdentityDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,25 +24,6 @@ namespace car_system.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -121,14 +105,9 @@ namespace car_system.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UsersId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -352,6 +331,9 @@ namespace car_system.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
@@ -359,27 +341,29 @@ namespace car_system.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
+                    b.HasIndex("UsersId");
+
                     b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "0cf85811-9f7d-4ca8-916a-d5a97a068328",
+                            ConcurrencyStamp = "4810d2af-fcb0-406f-ae08-b7d6dd8db636",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "4b94b029-b9ef-4ba0-952e-2d0759807d2e",
+                            ConcurrencyStamp = "6646b66e-d6d2-4ee5-9359-d72b56a35d52",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "c035e603-7ded-46a4-891e-6102b2adaa0c",
+                            ConcurrencyStamp = "eba3ce0f-6c95-45fb-bf76-dab627112d86",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -502,10 +486,6 @@ namespace car_system.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("car_system.Models.Entities.Users", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UsersId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -591,6 +571,13 @@ namespace car_system.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("car_system.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("car_system.Models.Entities.Users", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UsersId");
                 });
 
             modelBuilder.Entity("car_system.Models.Entities.Cars", b =>

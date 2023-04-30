@@ -1,4 +1,5 @@
 ﻿using car_system.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,10 +8,13 @@ namespace car_system.Controllers.Data
 {
     public class ApplicationDbContext : IdentityDbContext<Users, UserRole, string>
     {
+       
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +57,7 @@ namespace car_system.Controllers.Data
                 .Property(o => o.Value)
                 .HasPrecision(18, 2);
 
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             // Seed user roles
             modelBuilder.Entity<UserRole>().HasData(
                 new UserRole { Id = "1", Name = "Staff", NormalizedName = "STAFF" },

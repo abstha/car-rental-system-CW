@@ -14,11 +14,13 @@ namespace car_system.Controllers
 
         private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
+        private readonly RoleManager<UserRole> _roleManager;
 
-        public AccountController(UserManager<Users> userManager, SignInManager<Users> signInManager)
+        public AccountController(UserManager<Users> userManager, SignInManager<Users> signInManager, RoleManager<UserRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -46,6 +48,18 @@ namespace car_system.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Check if the role "CUSTOMER" exists
+                    var roleExists = await _roleManager.RoleExistsAsync("CUSTOMER");
+                    if (!roleExists)
+                    {
+                        // Create the role "CUSTOMER" if it doesn't exist
+                        var role = new UserRole { Name = "CUSTOMER", NormalizedName = "CUSTOMER" };
+                        await _roleManager.CreateAsync(role);
+                    }
+
+                    // Assign the "CUSTOMER" role to the user
+                    await _userManager.AddToRoleAsync(user, "CUSTOMER");
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     // Registration successful
                     return Ok(new { Message = "Registration successful" });
