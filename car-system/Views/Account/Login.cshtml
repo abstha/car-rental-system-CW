@@ -1,0 +1,71 @@
+﻿@model LoginView
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hello</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link rel="stylesheet" type="text/css" href="~/css/auth.css" />
+
+    @*<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+</head>
+
+<body>
+    <div class="split-screen">
+        <div class="left">
+            <section class="copy">
+                <!-- <h1>Explore our services</h1>
+                    <p>
+                        Over 1000 satisfied client
+                    </p> -->
+            </section>
+        </div>
+        <div class="right">
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <section class="copy">
+                    <h2>Sign in</h2>
+                    <a class="register-container">
+                        <p>
+                            Don't have an account?
+                            <a href="/Account/Register">
+                                <strong>Register</strong>
+                            </a>
+                        </p>
+                    </a>
+                </section>
+
+                <div class="input-container email">
+                    <label for="email">Email</label>
+                    <input id="email" name="Email" type="email" placeholder="Your email" value="@Model.Email" />
+                </div>
+
+                <div class="input-container password">
+                    <label for="password">Password</label>
+                    <input id="password" name="Password" type="password" placeholder="Your password" value="@Model.Password" />
+                    <i class="far fa-eye-slash"></i>
+                </div>>
+
+                <div class="input-container remember-me">
+                    <label for="rememberMe">Remember me</label>
+                    <input id="rememberMe" name="RememberMe" type="checkbox" value="true" checked="@Model.RememberMe" />
+                </div>
+
+                <button class="signin-btn" type="submit">Sign In</button>
+
+                <!-- <section class="copy legal">
+                        <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a> &amp; <a href="#">Terms of Service</a>.</span></p>
+                    </section> -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>

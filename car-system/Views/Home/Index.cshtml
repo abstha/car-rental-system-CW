@@ -2,7 +2,253 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hello</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link rel="stylesheet" type="text/css" href="~/css/homepage.css" />
+
+    @*<link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <!-- Nav Container -->
+        <div class="nav container">
+            <!-- Menu Icon -->
+            <i class="bx bx-menu" id="menu-icon"></i>
+            <!-- Logo -->
+            <a href="#" class="logo">Hajur ko <span>car rental</span></a>
+            <!-- Nav List -->
+            <ul class="navbar">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#blog">Our Blog</a></li>
+            </ul>
+
+            <!-- Search Icon -->
+            <i class="bx bx-search" id="search-icon"></i>
+            <!-- Search Box -->
+            <div class="search-box container">
+                <input type="search" name="" id="" placeholder="Search here..." />
+            </div>
+
+            <button class="home-signin-btn" type="submit">Login</button>
+            <button class="home-signup-btn" type="submit">Register</button>
+        </div>
+    </header>
+
+    <!-- Home -->
+
+    <section class="home" id="home">
+        <div class="home-text">
+            <h1>
+                We Rent Variety <br />
+                Of <span> Cars </span>
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet <br />
+                consectetur adipisicing elit.
+            </p>
+            <a href="#" class="home-btn">Discover Now</a>
+        </div>
+    </section>
+
+    <!-- Cars section -->
+    <section class="cars" id="cars">
+        <div class="heading">
+            <span>All Cars</span>
+            <h2>We have all types cars</h2>
+            <p>
+                Lorem ipsum dolor sit amet coicing elit. Oint similique. Aspernaturm!
+            </p>
+        </div>
+
+        <!-- Cars container -->
+
+        <div class="cars-container container">
+            <!-- Box 1 -->
+            <div class="box">
+                <img src="/Images/car1.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="box">
+                <img src="/Images/car2.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="box">
+                <img src="/Images/car3.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="box">
+                <img src="/Images/car4.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+
+            <!-- Box 5 -->
+            <div class="box">
+                <img src="/Images/car4.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+
+            <!-- Box  -->
+            <div class="box">
+                <img src="/Images/car6.jpg" alt="" />
+                <h2>Porche Car</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about container" id="about">
+        <div class="about-img">
+            <img src="/Images/about.png" alt="" />
+        </div>
+
+        <div class="about-text">
+            <span>About Us</span>
+            <h2>
+                Cheap Prices With <br />
+                Quality Cars
+            </h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+                aspernatur vitae amet perspiciatis reiciendis quae, quis odit atque.
+                Alias qui, dignissimos voluptatem praesentium nam adipisci quasi
+                temporibus quisquam accusantium quibusdam.
+            </p>
+
+            <!-- About Button -->
+            <a href="#" class="home-btn">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Blog Container -->
+    <section class="blog" id="blog">
+        <div class="heading">
+            <span>Blog & News</span>
+            <h2>Our Blog Content</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
+                assumenda iste molestiae
+            </p>
+        </div>
+
+        <!-- Blog Container -->
+        <div class="blog-container container">
+            <!-- Box 1 -->
+            <div class="box">
+                <img src="/Images/car1.jpg" alt="" />
+                <span>Feb 14 2021</span>
+                <h3>How to Get Perfect Car At Low Price</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+                    veritatis iure officiis delectus aliquid sunt cupiditate officia
+                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
+                    porro nisi? Commodi, dignissimos.
+                </p>
+                <a href="#" class="blog-btn">
+                    Read More<i class="bx bx-right-arrow-alt"></i>
+                </a>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="box">
+                <img src="/Images/car2.jpg" alt="" />
+                <span>Feb 14 2021</span>
+                <h3>How to Get Perfect Car At Low Price</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+                    veritatis iure officiis delectus aliquid sunt cupiditate officia
+                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
+                    porro nisi? Commodi, dignissimos.
+                </p>
+                <a href="#" class="blog-btn">
+                    Read More<i class="bx bx-right-arrow-alt"></i>
+                </a>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="box">
+                <img src="/Images/car3.jpg" alt="" />
+                <span>Feb 14 2021</span>
+                <h3>How to Get Perfect Car At Low Price</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+                    veritatis iure officiis delectus aliquid sunt cupiditate officia
+                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
+                    porro nisi? Commodi, dignissimos.
+                </p>
+                <a href="#" class="blog-btn">
+                    Read More<i class="bx bx-right-arrow-alt"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <section class="footer">
+        <div class="footer-container container">
+            <div class="footer-box">
+                <a href="#" class="logo">Hajur ko <span>Car Rental</span></a>
+                <div class="social">
+                    <a href="#"><i class="bx bxl-facebook"></i></a>
+                    <a href="#"><i class="bx bxl-twitter"></i></a>
+                    <a href="#"><i class="bx bxl-instagram"></i></a>
+                    <a href="#"><i class="bx bxl-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-box">
+                <h3>Page</h3>
+                <a href="#">Home</a>
+                <a href="#">Cars</a>
+                <a href="#">Parts</a>
+                <a href="#">Sales</a>
+            </div>
+
+            <div class="footer-box">
+                <h3>Legal</h3>
+                <a href="#">Privacy</a>
+                <a href="#">Refund Policy</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+
+            <div class="footer-box">
+                <h3>Contact</h3>
+                <p>Kathmandu, Nepal</p>
+                <p>+977 9820346620</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="copyright">
+        <p>&#169; All Rights Reserved</p>
+    </div>
+
+    <!-- Link To Js -->
+    <script src="main.js"></script>
+</body>
+</html>

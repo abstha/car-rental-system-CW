@@ -83,7 +83,8 @@ namespace car_system.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            var loginModel = new LoginView();
+            return View(loginModel);
         }
 
         [HttpPost]

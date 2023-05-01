@@ -1,26 +1,87 @@
 ﻿@model RegisterView
-<h1>Register</h1>
 
-<form asp-controller="Account" asp-action="Register" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hello</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <link rel="stylesheet" type="text/css" href="~/css/auth.css" />
+
+    @*<link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+</head>
+
+<body>
+    <div class="split-screen">
+        <div class="left">
+            <section class="copy">
+                <!-- <h1>Explore our services</h1>
+                <p>
+                    Over 1000 satisfied client
+                </p> -->
+            </section>
+        </div>
+        <div class="right">
+            <section class="copy">
+                <h2>Sign Up</h2>
+                <a class="login-container">
+                    <p>
+                        Already have an account?
+                        <a href="/Account/Login">
+                            <strong>Log In</strong>
+                        </a>
+                    </p>
+                </a>
+            </section>
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div class="input-container email">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="Your email">
+                </div>
+
+                <div class="input-container password">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Your password">
+                    <i class="far fa-eye-slash"></i>
+                </div>
+
+                <div class="input-container cpassword">
+                    <label for="cpassword">Confirm Password</label>
+                    <input id="cpassword" name="ConfirmPassword" type="password" placeholder="Confirm Password">
+                    <i class="far fa-eye-slash"></i>
+                </div>
+
+                <div class="input-container">
+                    <label for="name">Name</label>
+                    <input id="name" name="Name" type="text" placeholder="Your name">
+                </div>
+
+                <div class="input-container">
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" name="PhoneNumber" type="tel" placeholder="Your phone number">
+                </div>
+
+                <div class="input-container">
+                    <label for="address">Address</label>
+                    <input id="address" name="Address" type="text" placeholder="Your address">
+                </div>
+
+                <button class="signup-btn" type="submit">Sign Up</button>
+            </form>
+
+            <section class="copy legal">
+                <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a> &amp; <a href="#">Terms of Service</a>.</span></p>
+            </section>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ConfirmPassword">Confirm Password</label>
-        <input asp-for="ConfirmPassword" class="form-control" type="password" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+</body>
+</html>
