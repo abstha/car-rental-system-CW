@@ -114,7 +114,7 @@ namespace car_system.Controllers
                         if (roles.Contains("Admin"))
                         {
                             // Redirect to the admin page
-                            return RedirectToAction("AdminPage", "Home");
+                            return RedirectToAction("AdminCar", "Home");
                         }
                         else if (roles.Contains("Staff"))
                         {

@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width,
+				initial-scale=1.0">
+	<title>Admin</title>
+	<link rel="stylesheet"
+		  href="~/css/addStaff.css">
+</head>
+
+<body>
+
+	<!-- for header part -->
+	<header>
+
+		<div class="logosec">
+			<div class="logo"> Dashboard</div>
+
+		</div>
+
+
+
+		<div class="message">
+
+			<div class="dp">
+				<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+					 class="dpicn"
+					 alt="dp">
+			</div>
+		</div>
+
+	</header>
+
+	<div class="main-container">
+		<div class="navcontainer">
+			<nav class="nav">
+				<div class="nav-upper-options">
+
+					<a href="/Home/AdminStaff">
+						<div class="nav-option option1">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+								 class="nav-img"
+								 alt="dashboard">
+							<h3> Staffs</h3>
+
+						</div>
+					</a>
+
+					<a href="/Home/AdminCar">
+						<div class="nav-option option4">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+								 class="nav-img"
+								 alt="dashboard">
+							<h3> Cars</h3>
+
+						</div>
+					</a>
+
+					<a href="/Home/AdminOffer">
+						<div class=" nav-option option2" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Offers</h3>
+
+						</div>
+					</a>
+
+					<a href="/Home/AddStaff">
+						<div class=" nav-option option3" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Add Staff</h3>
+
+						</div>
+					</a>
+
+					<a href="/Home/AddCar">
+						<div class=" nav-option option5" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Add Car</h3>
+
+						</div>
+					</a>
+
+
+
+
+					<div class="nav-option logout">
+						<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+							 class="nav-img"
+							 alt="logout">
+						<h3>Logout</h3>
+					</div>
+
+				</div>
+			</nav>
+		</div>
+		<div class="main">
+
+
+
+			<div class="report-container">
+				<div class="report-header">
+					<h1 class="recent-Articles">Staffs</h1>
+					<button class="view">View All</button>
+				</div>
+				<div class="formbold-main-wrapper">
+					<div class="formbold-form-wrapper">
+						<div class="formbold-form-title">
+							<h2 class="">Add Staffs <i class="fa-solid fa-car-side fa-flip-horizontal"></i></h2>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt.
+							</p>
+						</div>
+
+						<form method="post" action="@Url.Action("AddStaff", "Home")">
+							<!-- Specify the form action URL for registering staff -->
+							<div class="formbold-input-flex">
+								<div>
+									<label for="name" class="formbold-form-label">Name</label>
+									<input type="text" name="name" id="name" class="formbold-form-input" required />
+								</div>
+								<div>
+									<label for="email" class="formbold-form-label">Email</label>
+									<input type="email" name="email" id="email" class="formbold-form-input" required />
+								</div>
+							</div>
+
+							<div class="formbold-input-flex">
+								<div>
+									<label for="address" class="formbold-form-label">Address</label>
+									<input type="text" name="address" id="address" class="formbold-form-input" required />
+								</div>
+								<div>
+									<label for="phone" class="formbold-form-label">Phone Number</label>
+									<input type="text" name="phoneNumber" id="phone" class="formbold-form-input" required />
+								</div>
+							</div>
+
+							<div class="formbold-input-flex">
+								<div>
+									<label for="password" class="formbold-form-label">Password</label>
+									<input type="password" name="password" id="password" class="formbold-form-input" required />
+								</div>
+								<div>
+									<label for="confirmPassword" class="formbold-form-label">Confirm Password</label>
+									<input type="password" name="confirmPassword" id="confirmPassword" class="formbold-form-input" required />
+								</div>
+							</div>
+
+							<button type="submit" class="formbold-btn">Submit form</button>
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+			<a href="addStaff.html"><button class="view" style="margin-left: 90%">Add Staff <i class="fa-solid fa-user-plus"></i></button></a>
+		</div>
+	</div>
+
+	<script src="./index.js"></script>
+</body>
+</html>

@@ -13,10 +13,15 @@ namespace car_system.Models.Entities
         public DateTime RentalDate { get; set; }
         public string RentalStatus { get; set; }
 
+        [ForeignKey("ApprovedBy")]
+        public string ApprovedById { get; set; }
+
         [ForeignKey("UserId")]
         public virtual Users User { get; set; }
 
         [ForeignKey("CarRented")]
         public virtual Cars Car { get; set; }
+
+        public virtual Users ApprovedBy { get; set; }
     }
 }
