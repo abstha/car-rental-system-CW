@@ -21,5 +21,13 @@ namespace car_system.Controllers
             return View(cars);
         }
 
+        public IActionResult AdminPage()
+        {
+            // TODO: Add the necessary logic for the admin page
+
+            var cars = _homeService.GetAllCars();
+
+            return View(cars);
+        }
     }
 }

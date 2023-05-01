@@ -66,19 +66,21 @@ namespace car_system.Controllers.Data
                 // Save the changes to the database
                 context.SaveChanges();
 
-                // Add a role for the admin user (assuming you have a UserRole table/entity in your application)
-                var adminRole = new UserRole() { Name = "Admin" };
-                context.Roles.Add(adminRole);
+                // Find the admin role by its name ("Admin" in this case)
+                var adminRole = context.Roles.FirstOrDefault(r => r.Name == "Admin");
 
-                // Assign the role to the admin user
-                adminUser.Roles = new List<IdentityUserRole<string>>()
+                // If the admin role exists, assign it to the admin user
+                if (adminRole != null)
                 {
-                    new IdentityUserRole<string>()
+                    adminUser.Roles = new List<IdentityUserRole<string>>()
                     {
-                        RoleId = "2", // Admin role ID
-                        UserId = adminUser.Id
-                    }
-                };
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = adminRole.Id,
+                            UserId = adminUser.Id
+                        }
+                    };
+                }
 
                 // Save the changes to the database
                 context.SaveChanges();

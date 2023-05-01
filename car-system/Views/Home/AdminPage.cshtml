@@ -1,0 +1,167 @@
+﻿@using car_system.Models.Entities
+@model List<Cars>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width,
+				initial-scale=1.0">
+	<title>Admin</title>
+	<link rel="stylesheet"
+		  href="~/css/adminCar.css">
+	<link rel="stylesheet"
+		  href="responsive.css">
+</head>
+
+<body>
+
+	<!-- for header part -->
+	<header>
+
+		<div class="logosec">
+			<div class="logo"> Dashboard</div>
+
+		</div>
+
+
+
+		<div class="message">
+
+			<div class="dp">
+				<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+					 class="dpicn"
+					 alt="dp">
+			</div>
+		</div>
+
+	</header>
+
+	<div class="main-container">
+		<div class="navcontainer">
+			<nav class="nav">
+				<div class="nav-upper-options">
+
+					<a href="AdminStaff.html">
+						<div class="nav-option option1">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+								 class="nav-img"
+								 alt="dashboard">
+							<h3> Staffs</h3>
+
+						</div>
+					</a>
+
+
+
+					<a href="AdminCar.html">
+						<div class="nav-option option4">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+								 class="nav-img"
+								 alt="dashboard">
+							<h3> Cars</h3>
+
+						</div>
+					</a>
+
+					<a href="AdminOffers.html">
+						<div class=" nav-option option2" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Offers</h3>
+
+						</div>
+					</a>
+
+					<a href="addStaff.html">
+						<div class=" nav-option option3" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Add Staff</h3>
+
+						</div>
+					</a>
+
+					<a href="addCar.html">
+						<div class=" nav-option option5" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img"
+								 alt="articles">
+							<h3> Add Car</h3>
+
+						</div>
+					</a>
+
+
+
+
+					<div class="nav-option logout">
+						<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+							 class="nav-img"
+							 alt="logout">
+						<h3>Logout</h3>
+					</div>
+
+				</div>
+			</nav>
+		</div>
+		<div class="main">
+
+
+
+			<div class="report-container">
+				<div class="report-header">
+					<h1 class="recent-Articles">Cars</h1>
+					<button class="view">View All</button>
+				</div>
+
+				<div class="report-body">
+    <div class="report-topic-heading">
+        <h3 class="t-op">Car ID</h3>
+        <h3 class="t-op">Car Model</h3>
+        <h3 class="t-op">Condition</h3>
+        <h3 class="t-op">Availability</h3>
+        <h3 class="t-op">Price</h3>
+        <h3 class="t-op">Action</h3>
+    </div>
+
+			<div class="items">
+				@foreach (var car in Model)
+				{
+					<div class="item1">
+						<h3 class="t-op-nextlvl">@car.CarId</h3>
+						<h3 class="t-op-nextlvl">@car.Model</h3>
+						<h3 class="t-op-nextlvl">@car.Condition</h3>
+						<h3 class="t-op-nextlvl">@car.Availability</h3>
+						<h3 class="t-op-nextlvl">$@car.RentPrice</h3>
+						<td><button class="btnUpdate">Update <i class="fa-solid fa-user-pen"></i></button></td>
+						<td><button class="btnDelete">Delete <i class="fa-solid fa-user-slash"></i></button></td>
+					</div>
+				}
+				</div>
+			</div>
+
+
+
+			
+
+
+			</div>
+			<a href="addStaff.html"><button class="view" style="margin-left: 90%">Add Car<i class="fa-solid fa-user-plus"></i></button></a>
+		</div>
+	</div>
+
+	<script src="./index.js"></script>
+</body>
+</html>
