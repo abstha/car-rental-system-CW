@@ -1,4 +1,5 @@
 ﻿using car_system.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace car_system.Controllers.Data
@@ -45,7 +46,46 @@ namespace car_system.Controllers.Data
                     });
                     context.SaveChanges();
                 }
+                // Admin User
+                var adminUser = new Users()
+                {
+                    UserName = "admin@gmail.com",
+                    Email = "admin@gmail.com",
+                    Name = "Admin Abhinav",
+                    Phone = "1234567890",
+                    Address = "Patan"
+                };
+
+                // Use a password hasher to create a hashed password for the admin user
+                var passwordHasher = new PasswordHasher<Users>();
+                adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin1!");
+
+                // Add the admin user to the context
+                context.Users.Add(adminUser);
+
+                // Save the changes to the database
+                context.SaveChanges();
+
+                // Add a role for the admin user (assuming you have a UserRole table/entity in your application)
+                var adminRole = new UserRole() { Name = "Admin" };
+                context.Roles.Add(adminRole);
+
+                // Assign the role to the admin user
+                adminUser.Roles = new List<IdentityUserRole<string>>()
+                {
+                    new IdentityUserRole<string>()
+                    {
+                        RoleId = "2", // Admin role ID
+                        UserId = adminUser.Id
+                    }
+                };
+
+                // Save the changes to the database
+                context.SaveChanges();
+
             }
+
+            
         }
     }
 }

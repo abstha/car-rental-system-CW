@@ -1,0 +1,18 @@
+﻿@model car_system.Models.Entities.Cars
+
+<!-- Car details section -->
+<div>
+    <img src="@Model.Picture" alt="car" />
+    <h2>@Model.Model</h2>
+    <p>Condition: @Model.Condition</p>
+    <p>Availability: @Model.Availability</p>
+    <p>Rent Price: @Model.RentPrice</p>
+</div>
+
+<!-- Rent button -->
+<form method="post" action="/api/rentals">
+    <input type="hidden" name="rentalRequest.CarRented" value="@Model.CarId" />
+    <input type="hidden" name="rentalRequest.UserId" value="[USER_ID]" />
+    <input type="hidden" name="rentalRequest.RentalDate" value="[RENTAL_DATE]" />
+    <button type="submit">Rent Now</button>
+</form>

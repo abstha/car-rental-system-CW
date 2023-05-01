@@ -86,7 +86,6 @@ namespace car_system.Controllers
             var loginModel = new LoginView();
             return View(loginModel);
         }
-
         [HttpPost]
         [Route("/api/User/Login")]
         public async Task<IActionResult> Login(LoginView model)
@@ -97,8 +96,47 @@ namespace car_system.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Login successful
-                    return Ok(new { Message = "Login successful" });
+                    // Get the user details
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+
+                    if (user != null)
+                    {
+                        // Get the user ID
+                        string userId = user.Id;
+
+                        // Store the user ID in the session
+                        HttpContext.Session.SetString("UserId", userId);
+
+                        // Get the roles assigned to the user
+                        var roles = await _userManager.GetRolesAsync(user);
+
+                        // Check the role of the user
+                        if (roles.Contains("Admin"))
+                        {
+                            // Redirect to the admin page
+                            return RedirectToAction("AdminPage", "Home");
+                        }
+                        else if (roles.Contains("Staff"))
+                        {
+                            // Redirect to the staff page
+                            return RedirectToAction("StaffPage", "Home");
+                        }
+                        else if (roles.Contains("Customer"))
+                        {
+                            // Redirect to the customer page
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            // Role not found, handle accordingly
+                            return BadRequest(new { Message = "Role not found" });
+                        }
+                    }
+                    else
+                    {
+                        // User not found
+                        return BadRequest(new { Message = "User not found" });
+                    }
                 }
                 else
                 {

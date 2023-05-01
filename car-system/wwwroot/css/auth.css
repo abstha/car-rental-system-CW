@@ -70,6 +70,7 @@ a {
 .right .copy {
     color: black;
     text-align: center;
+    padding-right: 70px;
 }
 
     .right .copy p {
@@ -81,6 +82,8 @@ a {
     width: 328px;
 }
 
+form input[type="name"],
+form input[type="phone"],
 form input[type="email"],
 form input[type="address"],
 form input[type="password"],
@@ -124,7 +127,8 @@ label {
 .signup-btn {
     display: block;
     width: 100%;
-    background: var(--primary-blue);
+    /*background: var(--primary-blue);*/
+    background: #1a1a1a;
     color: white;
     font-weight: 700;
     border: none;
@@ -136,14 +140,16 @@ label {
 }
 
     .signup-btn:hover {
-        background: #2c4893;
+        /*background: #2c4893;*/
+        background: rgb(169, 20, 45);
         cursor: pointer;
     }
 
 .signin-btn {
     display: block;
     width: 100%;
-    background: var(--primary-blue);
+    /*background: var(--primary-blue);*/
+    background: #1a1a1a;
     color: white;
     font-weight: 700;
     border: none;
@@ -155,10 +161,11 @@ label {
 }
 
     .signin-btn:hover {
-        background: #2c4893;
-        cursor: pointer
+        /* background: #2c4893;*/
+        cursor: pointer cursor: pointer
     }
-    @media screen and (min-width: 900px) {
+
+@media screen and (min-width: 900px) {
     .split-screen {
         flex-direction: row;
         height: 100vh;

@@ -1,5 +1,7 @@
 ﻿using car_system.Controllers.Data;
+using car_system.Models.DTO;
 using car_system.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace car_system.Controllers.Services
@@ -7,16 +9,26 @@ namespace car_system.Controllers.Services
     public class CarService : ICarService
     {
         private readonly ApplicationDbContext _context;
+
         public CarService(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task CreateCar(Cars car)
+
+        public async Task CreateCar(CarCreateDTO carDTO)
         {
+            var car = new Cars
+            {
+                Model = carDTO.Model,
+                Picture = carDTO.Picture,
+                Condition = carDTO.Condition,
+                Availability = carDTO.Availability,
+                RentPrice = carDTO.RentPrice
+            };
+
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
         }
-
         public async Task DeleteCar(int CarId)
         {
             var car = await _context.Cars.FindAsync(CarId);
@@ -60,5 +72,6 @@ namespace car_system.Controllers.Services
             _context.Cars.Update(existingCar);
             await _context.SaveChangesAsync();
         }
+
     }
 }

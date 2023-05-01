@@ -1,5 +1,8 @@
-﻿@{
+﻿@using car_system.Models.Entities
+@model List<Cars>
+@{
     ViewData["Title"] = "Home Page";
+    var userId = Context.Session.GetString("UserId");
 }
 
 <!DOCTYPE html>
@@ -14,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/homepage.css" />
 
     @*<link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
 
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
           rel="stylesheet" />
@@ -22,13 +25,15 @@
     <link rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+   
 </head>
 
 <body>
     <!-- Navbar -->
     <header>
         <!-- Nav Container -->
-        <div class="nav container">
+        <div class="nav container1">
             <!-- Menu Icon -->
             <i class="bx bx-menu" id="menu-icon"></i>
             <!-- Logo -->
@@ -44,12 +49,13 @@
             <!-- Search Icon -->
             <i class="bx bx-search" id="search-icon"></i>
             <!-- Search Box -->
-            <div class="search-box container">
+            <div class="search-box container1">
                 <input type="search" name="" id="" placeholder="Search here..." />
             </div>
-
-            <button class="home-signin-btn" type="submit">Login</button>
-            <button class="home-signup-btn" type="submit">Register</button>
+            <div>
+                <a href="/Account/Login"><button class="home-signin-btn" type="submit">Login</button></a>
+                <a href="/Account/Register"><button class="home-signup-btn" type="submit">Register</button></a>
+            </div>
         </div>
     </header>
 
@@ -81,47 +87,38 @@
 
         <!-- Cars container -->
 
-        <div class="cars-container container">
-            <!-- Box 1 -->
-            <div class="box">
-                <img src="/Images/car1.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
-
-            <!-- Box 2 -->
-            <div class="box">
-                <img src="/Images/car2.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
-
-            <!-- Box 3 -->
-            <div class="box">
-                <img src="/Images/car3.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
-
-            <!-- Box 4 -->
-            <div class="box">
-                <img src="/Images/car4.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
-
-            <!-- Box 5 -->
-            <div class="box">
-                <img src="/Images/car4.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
-
-            <!-- Box  -->
-            <div class="box">
-                <img src="/Images/car6.jpg" alt="" />
-                <h2>Porche Car</h2>
-            </div>
+        <div class="cars-container container1">
+            @foreach (var car in Model)
+            {
+                <div class="product-card" id="product-card2">
+                    <div class="main">
+                        <img src="@car.Picture" alt="bird of paradise plant" id="main-image1" />
+                        <div class="price" id="price1">@car.RentPrice</div>
+                        <div class="inline-block">
+                            <h2>@car.Model</h2>
+                        </div>
+                    </div>
+                    <div class="details" id="details1">
+                        <div class="detail">
+                            <p class="type">
+                                <i class="fa-solid fa-gear"></i> &nbsp;
+                                Condition
+                            </p>
+                            <p class="description">@car.Condition</p>
+                        </div>
+                        <div class="detail">
+                            <p class="type"><i class="fa-solid fa-car"></i> &nbsp; Availability</p>
+                            <p class="description">@car.Availability</p>
+                        </div>
+                    </div>
+                    <button class="buy" data-car-id="@car.CarId">Rent Now</button>
+                </div>
+            }
         </div>
     </section>
 
     <!-- About -->
-    <section class="about container" id="about">
+    <section class="about container1" id="about">
         <div class="about-img">
             <img src="/Images/about.png" alt="" />
         </div>
@@ -156,7 +153,7 @@
         </div>
 
         <!-- Blog Container -->
-        <div class="blog-container container">
+        <div class="blog-container container1">
             <!-- Box 1 -->
             <div class="box">
                 <img src="/Images/car1.jpg" alt="" />
@@ -210,7 +207,7 @@
     <!-- Footer -->
 
     <section class="footer">
-        <div class="footer-container container">
+        <div class="footer-container container1">
             <div class="footer-box">
                 <a href="#" class="logo">Hajur ko <span>Car Rental</span></a>
                 <div class="social">
@@ -251,4 +248,44 @@
     <!-- Link To Js -->
     <script src="main.js"></script>
 </body>
+<script>
+    function createRentalRequest(carId, userId) {
+        var rentalRequest = {
+            RentalId: 0,
+            UserId: userId,
+            CarRented: carId,
+            RentalDate: new Date(),
+            RentalStatus: "Pending"
+        };
+
+        fetch('/api/rentals', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rentalRequest)
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log('Rental request created successfully');
+                    // Perform any necessary actions, such as displaying a success message
+                } else {
+                    console.error('Error creating rental request');
+                    // Handle the error and display an error message if needed
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    }
+
+    document.querySelectorAll('.buy').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var carId = this.getAttribute('data-car-id');
+            var userId = '@userId'; // Get the user ID from the session
+
+            createRentalRequest(carId, userId);
+        });
+    });
+</script>
 </html>

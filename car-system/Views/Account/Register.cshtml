@@ -12,7 +12,10 @@
     <link rel="stylesheet" type="text/css" href="~/css/auth.css" />
 
     @*<link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet" />
 
     <link rel="stylesheet"
           type="text/css"
@@ -43,44 +46,49 @@
             </section>
 
             <form asp-controller="Account" asp-action="Register" method="post">
+
+                <div class="input-container name">
+                    <label for="name">Name</label>
+                    <input id="name" name="Name" type="name" placeholder="Your name">
+                </div>
+
                 <div class="input-container email">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email" placeholder="Your email">
                 </div>
 
+                <div class="input-container phone">
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" name="PhoneNumber" type="phone" placeholder="Your phone number">
+                </div>
+
+                <div class="input-container address">
+                    <label for="address">Address</label>
+                    <input id="address" name="Address" type="address" placeholder="Your address">
+                </div>
+
                 <div class="input-container password">
                     <label for="password">Password</label>
                     <input id="password" name="password" type="password" placeholder="Your password">
-                    <i class="far fa-eye-slash"></i>
+                    <i class='bx bx-low-vision'></i>
                 </div>
 
                 <div class="input-container cpassword">
                     <label for="cpassword">Confirm Password</label>
-                    <input id="cpassword" name="ConfirmPassword" type="password" placeholder="Confirm Password">
-                    <i class="far fa-eye-slash"></i>
+                    <input id="cpassword" name="ConfirmPassword" type="cpassword" placeholder="Confirm Password">
+                    <i class='bx bx-low-vision'></i>
                 </div>
 
-                <div class="input-container">
-                    <label for="name">Name</label>
-                    <input id="name" name="Name" type="text" placeholder="Your name">
-                </div>
 
-                <div class="input-container">
-                    <label for="phone">Phone Number</label>
-                    <input id="phone" name="PhoneNumber" type="tel" placeholder="Your phone number">
-                </div>
 
-                <div class="input-container">
-                    <label for="address">Address</label>
-                    <input id="address" name="Address" type="text" placeholder="Your address">
-                </div>
+
 
                 <button class="signup-btn" type="submit">Sign Up</button>
             </form>
 
-            <section class="copy legal">
-                <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a> &amp; <a href="#">Terms of Service</a>.</span></p>
-            </section>
+            @*            <section class="copy legal">
+            <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a> &amp; <a href="#">Terms of Service</a>.</span></p>
+            </section>*@
         </div>
     </div>
 </body>

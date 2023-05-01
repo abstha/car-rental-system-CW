@@ -20,6 +20,7 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IRentalService, RentalService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IDamageService, DamageService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 
 
 builder.Services.AddIdentity<Users, UserRole>()
@@ -27,6 +28,8 @@ builder.Services.AddIdentity<Users, UserRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<RoleManager<UserRole>>();
+
+builder.Services.AddSession();
 
 
 // Add services to the container.
@@ -68,6 +71,8 @@ app.UseRouting();
 app.UseCors();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

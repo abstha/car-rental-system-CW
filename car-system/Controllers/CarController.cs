@@ -1,4 +1,5 @@
 ﻿using car_system.Controllers.Services;
+using car_system.Models.DTO;
 using car_system.Models.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +30,15 @@ namespace car_system.Controllers
 
         [HttpPost]
         [Route("/api/Cars/Create")]
-        public async Task<IActionResult> Create(Cars car)
+        public async Task<IActionResult> Create(CarCreateDTO carDTO)
         {
             if (ModelState.IsValid)
             {
-                await _carService.CreateCar(car);
+                await _carService.CreateCar(carDTO);
                 return RedirectToAction("Index");
             }
 
-            return View(car);
+            return View(carDTO);
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -101,5 +102,7 @@ namespace car_system.Controllers
             var cars = await _carService.SearchCars(searchTerm);
             return View(cars);
         }
+
+        
     }
 }
