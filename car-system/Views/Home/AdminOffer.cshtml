@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+	var userId = Context.Session.GetString("UserId");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -99,6 +104,16 @@
                             
                             </div></a>
 
+					<a href="/Home/AdminRequests">
+						<div class=" nav-option option" style="text-decoration: none;">
+
+							<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+								 class="nav-img" alt="articles">
+							<h3>User Request</h3>
+
+						</div>
+					</a>
+
 					
 
 					<div class="nav-option logout">
@@ -121,8 +136,7 @@
                         eiusmod tempor incididunt.
                     </p>
                 </div>
-
-				<form asp-controller="Offer" asp-action="CreateOffer" method="post">
+				<form asp-controller="Offer" asp-action="CreateOffer" method="post" id="createOfferForm">
 					<div class="formbold-input-flex">
 						<div>
 							<label for="startDate" class="formbold-form-label">From</label>
@@ -148,7 +162,7 @@
 					<div class="formbold-input-flex">
 						<div>
 							<label for="createdByUserID" class="formbold-form-label">Created By UserID</label>
-							<input type="text" name="CreatedByUserID" id="createdByUserID" class="formbold-form-input" required />
+							<input type="hidden" name="CreatedByUserID" id="createdByUserID" class="formbold-form-input" value="@userId" required />
 						</div>
 					</div>
 
@@ -159,4 +173,36 @@
 
 	<script src="./index.js"></script>
 </body>
+
+<script>
+	const form = document.getElementById("createOfferForm");
+
+	form.addEventListener("submit", function (event) {
+		event.preventDefault(); // Prevent default form submission
+
+		// Collect form data
+		const formData = new FormData(form);
+
+		// Send a POST request to the API endpoint
+		fetch('https://localhost:7043/api/offer', {
+			method: "POST",
+			body: formData
+		})
+			.then(response => {
+				if (response.ok) {
+					// Success
+					console.log("Offer created successfully!");
+					// Perform any additional actions or redirection
+				} else {
+					// Error
+					console.error("Failed to create offer:", response.statusText);
+					// Handle the error or display a message to the user
+				}
+			})
+			.catch(error => {
+				console.error("Failed to create offer:", error);
+				// Handle the error or display a message to the user
+			});
+	});
+</script>
 </html>

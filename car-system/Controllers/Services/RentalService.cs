@@ -39,11 +39,9 @@ namespace car_system.Controllers.Services
             return rentalRequest != null ? MapToDTO(rentalRequest) : null;
         }
 
-        public async Task<List<RentalRequestDTO>> GetAllRentalRequests()
+        public async Task<List<RentalRequest>> GetAllRentalRequests()
         {
-            var rentalRequests = await _dbContext.RentalRequests.ToListAsync();
-
-            return rentalRequests.Select(r => MapToDTO(r)).ToList();
+            return await _dbContext.RentalRequests.ToListAsync();
         }
 
         public async Task<List<RentalRequestDTO>> GetRentalRequestsByUserId(string userId)

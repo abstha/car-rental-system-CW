@@ -7,7 +7,7 @@ namespace car_system.Controllers.Services
     {
         Task<RentalRequestDTO> CreateRentalRequest(RentalRequestDTO rentalRequestDTO);
         Task<RentalRequestDTO> GetRentalRequestById(int rentalId);
-        Task<List<RentalRequestDTO>> GetAllRentalRequests();
+        Task<List<RentalRequest>> GetAllRentalRequests();
         Task<List<RentalRequestDTO>> GetRentalRequestsByUserId(string userId);
         Task<List<RentalRequestDTO>> GetRentalRequestsByCarId(int carId);
         Task<bool> UpdateRentalRequestStatus(int rentalId, string status);

@@ -14,14 +14,17 @@ namespace car_system.Controllers
         private readonly RoleManager<UserRole> _roleManager;
         private readonly IOfferService _offerService;
         private readonly ICarService _carService;
+        private readonly IRentalService _rentalService;
 
-        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager, IOfferService offerService, ICarService carService)
+        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager, IOfferService offerService, ICarService carService, IRentalService rentalService)
         {
             _homeService = homeService;
             _userManager = userManager;
             _roleManager = roleManager;
             _offerService = offerService;
             _carService = carService;
+            _rentalService = rentalService;
+
         }
         public IActionResult Index()
         {
@@ -121,6 +124,16 @@ namespace car_system.Controllers
             }
 
             return View(carDTO);
+        }
+
+        [HttpGet]
+        public IActionResult AdminRequests()
+        {
+            var rentalRequests = _rentalService.GetAllRentalRequests();
+            var rentalRequestList = rentalRequests.Result; // Await the task to get the list
+
+            // Pass the rental requests data to the view
+            return View(rentalRequestList);
         }
     }
 }
