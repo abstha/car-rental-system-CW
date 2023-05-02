@@ -165,8 +165,8 @@
                             <p class="description">@rentalRequest.ApprovedByStaffId</p>
                         </div>
 
-                        <a href="#"><button class="accept" onclick="updateRentalStatus('@rentalRequest.RentalId', 'Accepted')">Accept</button></a>
-                        <a href="#"><button class="decline" onclick="updateRentalStatus('@rentalRequest.RentalId', 'Declined')">Decline</button></a>
+                        <a href="#"><button class="accept" onclick="updateRentalStatus(@(rentalRequest.RentalId), 'Accepted')">Accept</button></a>
+                        <a href="#"><button class="decline" onclick="updateRentalStatus(@(rentalRequest.RentalId), 'Declined')">Decline</button></a>
                     </div>
                 </div>
             }
@@ -182,10 +182,12 @@
     function updateRentalStatus(rentalId, status) {
         var approvedByStaffId = '@User.Identity.Name'; // Get the current user ID from the session
 
+        var requestData = JSON.stringify(status);
+
         $.ajax({
             type: 'PUT',
             url: '/api/rentals/' + rentalId,
-            data: JSON.stringify({ status: status, approvedByStaffId: approvedByStaffId }),
+            data: requestData,
             contentType: 'application/json',
             success: function () {
                 // Update the UI or perform any necessary actions after successfully updating the status

@@ -73,18 +73,18 @@
                         <img src="/Images/bell.png" alt=""> <span>9</span>
                     </div>
                     <div class="notifi-box" id="box">
-    <h2>Notifications <span>@Model.Offers.Count</span></h2>
-    @foreach (var offer in Model.Offers)
-    {
-        <div class="notifi-item">
-            <img src="/Images/avatar1.png" alt="img">
-            <div class="text">
-                <h4>@offer.OfferDescription</h4>
-                <p>@offer.Value</p>
-            </div>
-        </div>
-    }
-</div>
+                        <h2>Notifications <span>@Model.Offers.Count</span></h2>
+                        @foreach (var offer in Model.Offers)
+                        {
+                            <div class="notifi-item">
+                                <img src="/Images/avatar1.png" alt="img">
+                                <div class="text">
+                                    <h4>@offer.OfferDescription</h4>
+                                    <p>@offer.Value</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 }
             </div>
             
@@ -351,5 +351,21 @@
             down = true;
         }
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".home-body").slick({
+            autoplay: true,
+            dots: true,
+            speed: 1000,
+            customPaging: function (slider, i) {
+                var thumb = $(slider.$slides[i]).data();
+                return "<a>" + (i + 1) + "</a>";
+            },
+            slidesToShow: 3,
+            centerMode: true,
+            centerPadding: '60px'
+        });
+    });
 </script>
 </html>
