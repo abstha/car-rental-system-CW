@@ -1,4 +1,5 @@
 ﻿using car_system.Controllers.Data;
+using car_system.Models.DTO;
 using car_system.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,21 @@ namespace car_system.Controllers.Services
         public List<Users> GetStaffMembers()
         {
             return _userManager.GetUsersInRoleAsync("Staff").Result.ToList();
+        }
+
+        public async Task CreateCar(CarCreateDTO carDTO)
+        {
+            var car = new Cars
+            {
+                Model = carDTO.Model,
+                Picture = carDTO.Picture,
+                Condition = carDTO.Condition,
+                Availability = carDTO.Availability,
+                RentPrice = carDTO.RentPrice
+            };
+
+            _dbContext.Cars.Add(car);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

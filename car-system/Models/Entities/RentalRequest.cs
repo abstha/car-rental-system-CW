@@ -8,20 +8,22 @@ namespace car_system.Models.Entities
         [Key]
         public int RentalId { get; set; }
 
-        public string UserId { get; set; }
-        public int CarRented { get; set; }
-        public DateTime RentalDate { get; set; }
-        public string RentalStatus { get; set; }
-
-        [ForeignKey("ApprovedBy")]
-        public string ApprovedById { get; set; }
-
         [ForeignKey("UserId")]
-        public virtual Users User { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey("CarRented")]
+        public int CarRented { get; set; }
+
+        public DateTime RentalDate { get; set; }
+        public string RentalStatus { get; set; }
+        public bool IsApproved { get; set; }
+        public string ApprovedByStaffId { get; set; } // New field for the approving staff member
+
+        [ForeignKey("UserId")]
+        [InverseProperty("RentalRequests")]
+        public virtual Users User { get; set; }
+
         public virtual Cars Car { get; set; }
 
-        public virtual Users ApprovedBy { get; set; }
     }
 }

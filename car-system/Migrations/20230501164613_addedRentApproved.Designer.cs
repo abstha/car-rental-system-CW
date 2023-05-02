@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230501164613_addedRentApproved")]
+    partial class addedRentApproved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,18 +305,15 @@ namespace car_system.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalId"));
 
-                    b.Property<string>("ApprovedByStaffId")
+                    b.Property<string>("AuthorizedById")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CarRented")
                         .HasColumnType("int");
 
                     b.Property<int?>("CarsCarId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("RentalDate")
                         .HasColumnType("datetime2");
@@ -327,6 +327,8 @@ namespace car_system.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RentalId");
+
+                    b.HasIndex("AuthorizedById");
 
                     b.HasIndex("CarRented");
 
@@ -367,21 +369,21 @@ namespace car_system.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "b4e462f8-9d3f-4536-8f7c-f4c3a0b171fe",
+                            ConcurrencyStamp = "7b7efcbd-73a1-4e6e-95c0-007b972ecd7b",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "48a85c3e-3f1b-4264-a332-dcca7bca58da",
+                            ConcurrencyStamp = "636bc57c-3694-44b9-9123-01a2dd8f90fe",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "e59c3715-f627-4856-bf81-a35a06028bc3",
+                            ConcurrencyStamp = "d9b0f587-ee2d-411a-bd72-5b692973b180",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -570,6 +572,12 @@ namespace car_system.Migrations
 
             modelBuilder.Entity("car_system.Models.Entities.RentalRequest", b =>
                 {
+                    b.HasOne("car_system.Models.Entities.Users", "AuthorizedBy")
+                        .WithMany()
+                        .HasForeignKey("AuthorizedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("car_system.Models.Entities.Cars", "Car")
                         .WithMany()
                         .HasForeignKey("CarRented")
@@ -585,6 +593,8 @@ namespace car_system.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("AuthorizedBy");
 
                     b.Navigation("Car");
 

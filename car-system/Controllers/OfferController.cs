@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace car_system.Controllers
 {
     [ApiController]
-    [Route("api/offers")]
+    [Route("api/offer")]
     public class OfferController : Controller
     {
         private readonly IOfferService _offerService;
@@ -16,19 +16,17 @@ namespace car_system.Controllers
             _offerService = offerService;
         }
 
-        // GET: api/offers
+        // GET: api/offer
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult GetAllOffers()
         {
             var offers = _offerService.GetAllOffers();
-            return View(offers);
+            return Ok(offers);
         }
 
-        // GET: api/offers/{id}
+        // GET: api/offer/{id}
         [HttpGet("{id}")]
-
-
-        public IActionResult Details(int id)
+        public IActionResult GetOfferById(int id)
         {
             var offer = _offerService.GetOfferById(id);
 
@@ -37,94 +35,54 @@ namespace car_system.Controllers
                 return NotFound();
             }
 
-            return View(offer);
+            return Ok(offer);
         }
 
-        // GET: api/offers/create
-        [HttpGet("create")]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: api/offers
+        // POST: api/offer
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(AddOfferView offerView)
+        public IActionResult CreateOffer([FromBody] CreateOfferView offerView)
         {
-            if (ModelState.IsValid)
+            try
             {
                 _offerService.CreateOffer(offerView);
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
-
-            return View(offerView);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: api/offers/edit/{id}
-        [HttpGet("edit/{id}")]
-
-
-        public IActionResult Edit(int id)
+        // PUT: api/offer/{id}
+        [HttpPut("{id}")]
+        public IActionResult UpdateOffer(int id, [FromBody] Offers offer)
         {
-            var offer = _offerService.GetOfferById(id);
-
-            if (offer == null)
+            try
             {
-                return NotFound();
-            }
-
-            return View(offer);
-        }
-
-        // POST: api/offers/edit/{id}
-        [HttpPost("edit/{id}")]
-        [ValidateAntiForgeryToken]
-       
-
-        public IActionResult Edit(int id, Offers offer)
-        {
-            if (id != offer.OfferID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
+                offer.OfferID = id;
                 _offerService.UpdateOffer(offer);
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
-
-            return View(offer);
-        }
-
-        // GET: api/offers/delete/{id}
-        [HttpGet("delete/{id}")]
- 
-
-        public IActionResult Delete(int id)
-        {
-            var offer = _offerService.GetOfferById(id);
-
-            if (offer == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(offer);
         }
 
-        // POST: api/offers/delete/{id}
-        [HttpPost("delete/{id}")]
-        [ValidateAntiForgeryToken]
-       
-
-        public IActionResult DeleteConfirmed(int id)
+        // DELETE: api/offer/{id}
+        [HttpDelete("{id}")]
+        public IActionResult DeleteOffer(int id)
         {
-            _offerService.DeleteOffer(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _offerService.DeleteOffer(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
     }
 }
 

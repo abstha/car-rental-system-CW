@@ -5,7 +5,7 @@ namespace car_system.Controllers.Services
 {
     public interface IRentalService
     {
-        Task<RentalRequestDTO> CreateRentalRequest(string userId, int carId, DateTime rentalDate);
+        Task<RentalRequestDTO> CreateRentalRequest(RentalRequestDTO rentalRequestDTO);
         Task<RentalRequestDTO> GetRentalRequestById(int rentalId);
         Task<List<RentalRequestDTO>> GetAllRentalRequests();
         Task<List<RentalRequestDTO>> GetRentalRequestsByUserId(string userId);

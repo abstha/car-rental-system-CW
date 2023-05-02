@@ -7,5 +7,7 @@
         public int CarRented { get; set; }
         public DateTime RentalDate { get; set; }
         public string RentalStatus { get; set; }
+        public bool IsApproved { get; set; }
+        public string ApprovedByStaffId { get; set; }
     }
 }

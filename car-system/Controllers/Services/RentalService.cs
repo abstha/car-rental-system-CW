@@ -14,14 +14,16 @@ namespace car_system.Controllers.Services
             _dbContext = dbContext;
         }
 
-        public async Task<RentalRequestDTO> CreateRentalRequest(string userId, int carId, DateTime rentalDate)
+        public async Task<RentalRequestDTO> CreateRentalRequest(RentalRequestDTO rentalRequestDTO)
         {
             var rentalRequest = new RentalRequest
             {
-                UserId = userId,
-                CarRented = carId,
-                RentalDate = rentalDate,
-                RentalStatus = "Pending"
+                UserId = rentalRequestDTO.UserId,
+                CarRented = rentalRequestDTO.CarRented,
+                RentalDate = rentalRequestDTO.RentalDate,
+                RentalStatus = "Pending",
+                IsApproved = rentalRequestDTO.IsApproved,
+                ApprovedByStaffId = rentalRequestDTO.ApprovedByStaffId
             };
 
             _dbContext.RentalRequests.Add(rentalRequest);
@@ -92,8 +94,11 @@ namespace car_system.Controllers.Services
                 UserId = rentalRequest.UserId,
                 CarRented = rentalRequest.CarRented,
                 RentalDate = rentalRequest.RentalDate,
-                RentalStatus = rentalRequest.RentalStatus
+                RentalStatus = rentalRequest.RentalStatus,
+                IsApproved = rentalRequest.IsApproved,
+                ApprovedByStaffId = rentalRequest.ApprovedByStaffId
             };
         }
+
     }
 }

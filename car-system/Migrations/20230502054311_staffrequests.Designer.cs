@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230502054311_staffrequests")]
+    partial class staffrequests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,18 +305,11 @@ namespace car_system.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalId"));
 
-                    b.Property<string>("ApprovedByStaffId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CarRented")
                         .HasColumnType("int");
 
                     b.Property<int?>("CarsCarId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("RentalDate")
                         .HasColumnType("datetime2");
@@ -335,6 +331,37 @@ namespace car_system.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RentalRequests");
+                });
+
+            modelBuilder.Entity("car_system.Models.Entities.StaffRequest", b =>
+                {
+                    b.Property<int>("StaffRequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StaffRequestId"));
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRejected")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RentalRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StaffMemberId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("StaffRequestId");
+
+                    b.HasIndex("RentalRequestId")
+                        .IsUnique();
+
+                    b.HasIndex("StaffMemberId");
+
+                    b.ToTable("StaffRequests");
                 });
 
             modelBuilder.Entity("car_system.Models.Entities.UserRole", b =>
@@ -367,21 +394,21 @@ namespace car_system.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "b4e462f8-9d3f-4536-8f7c-f4c3a0b171fe",
+                            ConcurrencyStamp = "e44aa0d0-c3f9-47da-b137-9467cb3fa382",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "48a85c3e-3f1b-4264-a332-dcca7bca58da",
+                            ConcurrencyStamp = "c9acf5ba-9248-4862-b211-273cb167f61d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "e59c3715-f627-4856-bf81-a35a06028bc3",
+                            ConcurrencyStamp = "20129ae8-91ce-4d70-9131-40d7f51a85e7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -591,9 +618,34 @@ namespace car_system.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("car_system.Models.Entities.StaffRequest", b =>
+                {
+                    b.HasOne("car_system.Models.Entities.RentalRequest", "RentalRequest")
+                        .WithOne("StaffRequest")
+                        .HasForeignKey("car_system.Models.Entities.StaffRequest", "RentalRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("car_system.Models.Entities.Users", "StaffMember")
+                        .WithMany()
+                        .HasForeignKey("StaffMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RentalRequest");
+
+                    b.Navigation("StaffMember");
+                });
+
             modelBuilder.Entity("car_system.Models.Entities.Cars", b =>
                 {
                     b.Navigation("RentalRequests");
+                });
+
+            modelBuilder.Entity("car_system.Models.Entities.RentalRequest", b =>
+                {
+                    b.Navigation("StaffRequest")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("car_system.Models.Entities.Users", b =>

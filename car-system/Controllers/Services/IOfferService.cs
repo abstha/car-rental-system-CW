@@ -6,10 +6,10 @@ namespace car_system.Controllers.Services
 {
     public interface IOfferService
     {
-        Offers GetOfferById(int offerId);
+        Offers GetOfferById(int id);
         List<Offers> GetAllOffers();
-        void CreateOffer(AddOfferView offerView);
+        void CreateOffer(CreateOfferView offerView);
         void UpdateOffer(Offers offer);
-        void DeleteOffer(int offerId);
+        void DeleteOffer(int id);
     }
 }

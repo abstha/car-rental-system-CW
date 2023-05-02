@@ -88,32 +88,37 @@
         <!-- Cars container -->
 
         <div class="cars-container container1">
-            @foreach (var car in Model)
-            {
-                <div class="product-card" id="product-card2">
-                    <div class="main">
-                        <img src="@car.Picture" alt="bird of paradise plant" id="main-image1" />
-                        <div class="price" id="price1">@car.RentPrice</div>
-                        <div class="inline-block">
-                            <h2>@car.Model</h2>
+            <form id="rentalForm" method="post" asp-controller="Rental" asp-action="CreateRentalRequest">
+                <!-- Your existing HTML code for the car cards -->
+                @foreach (var car in Model)
+                {
+                    <div class="product-card" id="product-card2">
+                        <!-- Car details -->
+                        <div class="main">
+                            <img src="@car.Picture" alt="car image" id="main-image1" />
+                            <div class="price" id="price1">@car.RentPrice</div>
+                            <div class="inline-block">
+                                <h2>@car.Model</h2>
+                            </div>
                         </div>
+                        <div class="details" id="details1">
+                            <div class="detail">
+                                <p class="type">
+                                    <i class="fa-solid fa-gear"></i> &nbsp;
+                                    Condition
+                                </p>
+                                <p class="description">@car.Condition</p>
+                            </div>
+                            <div class="detail">
+                                <p class="type"><i class="fa-solid fa-car"></i> &nbsp; Availability</p>
+                                <p class="description">@car.Availability</p>
+                            </div>
+                        </div>
+                        <!-- Rent button -->
+                        <button type="button" class="rent-button" data-car-id="@car.CarId">Rent Now</button>
                     </div>
-                    <div class="details" id="details1">
-                        <div class="detail">
-                            <p class="type">
-                                <i class="fa-solid fa-gear"></i> &nbsp;
-                                Condition
-                            </p>
-                            <p class="description">@car.Condition</p>
-                        </div>
-                        <div class="detail">
-                            <p class="type"><i class="fa-solid fa-car"></i> &nbsp; Availability</p>
-                            <p class="description">@car.Availability</p>
-                        </div>
-                    </div>
-                    <button class="buy" data-car-id="@car.CarId">Rent Now</button>
-                </div>
-            }
+                }
+            </form>
         </div>
     </section>
 
@@ -249,42 +254,37 @@
     <script src="main.js"></script>
 </body>
 <script>
-    function createRentalRequest(carId, userId) {
-        var rentalRequest = {
-            RentalId: 0,
-            UserId: userId,
-            CarRented: carId,
-            RentalDate: new Date(),
-            RentalStatus: "Pending"
-        };
+    const rentButtons = document.querySelectorAll('.rent-button');
+    const userId = '@Context.Session.GetString("UserId")';
 
-        fetch('/api/rentals', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(rentalRequest)
-        })
-            .then(function (response) {
+    rentButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const carId = button.getAttribute('data-car-id');
+            const rentalRequest = {
+                CarRented: carId, // ID of the car being rented
+                UserId: userId, // ID of the user making the rental request
+                RentalStatus: 'pending', // Default status value
+                 RentalDate: ... // Include the rental date if needed
+                // ... include other properties if needed
+            };
+
+            try {
+                const response = await fetch('/api/rentals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(rentalRequest),
+                });
+
                 if (response.ok) {
-                    console.log('Rental request created successfully');
-                    // Perform any necessary actions, such as displaying a success message
+                    // handle success response
                 } else {
-                    console.error('Error creating rental request');
-                    // Handle the error and display an error message if needed
+                    // handle error response
                 }
-            })
-            .catch(function (error) {
-                console.error('Error:', error);
-            });
-    }
-
-    document.querySelectorAll('.buy').forEach(function (button) {
-        button.addEventListener('click', function () {
-            var carId = this.getAttribute('data-car-id');
-            var userId = '@userId'; // Get the user ID from the session
-
-            createRentalRequest(carId, userId);
+            } catch (error) {
+                // handle network or other errors
+            }
         });
     });
 </script>

@@ -3,6 +3,7 @@ using car_system.Controllers.Services;
 using car_system.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using car_system.Models;
+using car_system.Models.DTO;
 
 namespace car_system.Controllers
 {
@@ -11,12 +12,16 @@ namespace car_system.Controllers
         private readonly IHomeService _homeService;
         private readonly UserManager<Users> _userManager;
         private readonly RoleManager<UserRole> _roleManager;
+        private readonly IOfferService _offerService;
+        private readonly ICarService _carService;
 
-        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager)
+        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager, IOfferService offerService, ICarService carService)
         {
             _homeService = homeService;
             _userManager = userManager;
             _roleManager = roleManager;
+            _offerService = offerService;
+            _carService = carService;
         }
         public IActionResult Index()
         {
@@ -89,6 +94,33 @@ namespace car_system.Controllers
         {
             var staffMembers = _userManager.GetUsersInRoleAsync("Staff").Result.ToList();
             return View(staffMembers);
+        }
+
+        public IActionResult AdminOffer()
+        {
+            // TODO: Add the necessary logic for the admin offer page
+
+            var offers = _offerService.GetAllOffers();
+
+            return View(offers);
+        }
+
+        [HttpGet]
+        public IActionResult AddCar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCar(CarCreateDTO carDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                await _carService.CreateCar(carDTO);
+                return RedirectToAction("Index");
+            }
+
+            return View(carDTO);
         }
     }
 }

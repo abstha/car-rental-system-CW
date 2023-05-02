@@ -1,71 +1,64 @@
-﻿using car_system.Models;
+﻿using car_system.Controllers.Data;
+using car_system.Models;
 using car_system.Models.Entities;
+using System;
 
 namespace car_system.Controllers.Services
 {
     public class OfferService : IOfferService
     {
-        private readonly List<Offers> _offers;
+        private readonly ApplicationDbContext _dbContext;
 
-        public OfferService()
+        public OfferService(ApplicationDbContext dbContext)
         {
-            _offers = new List<Offers>();
+            _dbContext = dbContext;
         }
 
-        public Offers GetOfferById(int offerId)
+        public Offers GetOfferById(int id)
         {
-            return _offers.FirstOrDefault(offer => offer.OfferID == offerId);
+            return _dbContext.Offers.Find(id);
         }
 
         public List<Offers> GetAllOffers()
         {
-            return _offers;
+            return _dbContext.Offers.ToList();
         }
 
-        public void CreateOffer(AddOfferView offerView)
+        public void CreateOffer(CreateOfferView offerView)
         {
             var offer = new Offers
             {
-                OfferID = GenerateOfferId(),
                 StartDate = offerView.StartDate,
                 EndDate = offerView.EndDate,
-                Type = offerView.Type,
                 Value = offerView.Value,
                 OfferDescription = offerView.OfferDescription,
                 CreatedByUserID = offerView.CreatedByUserID
             };
 
-            _offers.Add(offer);
+            _dbContext.Offers.Add(offer);
+            _dbContext.SaveChanges();
         }
 
         public void UpdateOffer(Offers offer)
         {
-            var existingOffer = _offers.FirstOrDefault(o => o.OfferID == offer.OfferID);
-            if (existingOffer != null)
-            {
-                existingOffer.StartDate = offer.StartDate;
-                existingOffer.EndDate = offer.EndDate;
-                existingOffer.Type = offer.Type;
-                existingOffer.Value = offer.Value;
-                existingOffer.OfferDescription = offer.OfferDescription;
-                existingOffer.CreatedByUserID = offer.CreatedByUserID;
-            }
+            _dbContext.Offers.Update(offer);
+            _dbContext.SaveChanges();
         }
 
-        public void DeleteOffer(int offerId)
+        public void DeleteOffer(int id)
         {
-            var offer = _offers.FirstOrDefault(o => o.OfferID == offerId);
+            var offer = _dbContext.Offers.Find(id);
+
             if (offer != null)
             {
-                _offers.Remove(offer);
+                _dbContext.Offers.Remove(offer);
+                _dbContext.SaveChanges();
             }
         }
 
-        private int GenerateOfferId()
+        Offers IOfferService.GetOfferById(int id)
         {
-            // Generate a unique offer ID based on your requirements
-            // This is just a placeholder implementation
-            return _offers.Count + 1;
+            throw new NotImplementedException();
         }
     }
 }

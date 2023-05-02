@@ -20,7 +20,7 @@ namespace car_system.Controllers
         {
             try
             {
-                var createdRentalRequest = await _rentalService.CreateRentalRequest(rentalRequest.UserId, rentalRequest.CarRented, rentalRequest.RentalDate);
+                var createdRentalRequest = await _rentalService.CreateRentalRequest(rentalRequest);
                 return Ok(createdRentalRequest);
             }
             catch (Exception ex)

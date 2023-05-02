@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using car_system.Controllers.Data;
 
@@ -11,9 +12,11 @@ using car_system.Controllers.Data;
 namespace car_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230502061946_removeStaffRequetss")]
+    partial class removeStaffRequetss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,21 +370,21 @@ namespace car_system.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "b4e462f8-9d3f-4536-8f7c-f4c3a0b171fe",
+                            ConcurrencyStamp = "b14e3a55-dbcc-4c64-8186-ac668fe05de3",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "48a85c3e-3f1b-4264-a332-dcca7bca58da",
+                            ConcurrencyStamp = "565e231f-c2ab-44c7-8d71-972a0dc88597",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "e59c3715-f627-4856-bf81-a35a06028bc3",
+                            ConcurrencyStamp = "a2ba5241-3b6d-4b9f-a3ea-9ee8d00eb943",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

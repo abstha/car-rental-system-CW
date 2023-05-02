@@ -24,13 +24,15 @@ namespace car_system.Controllers.Data
             // Configure the relationships
             modelBuilder.Entity<RentalRequest>()
                 .HasOne(r => r.User)
-                .WithMany()
-                .HasForeignKey(r => r.UserId);
+                .WithMany(u => u.RentalRequests)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<RentalRequest>()
                 .HasOne(r => r.Car)
                 .WithMany()
-                .HasForeignKey(r => r.CarRented);
+                .HasForeignKey(r => r.CarRented)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Damages>()
                 .HasOne(d => d.User)
@@ -57,6 +59,9 @@ namespace car_system.Controllers.Data
                 .Property(o => o.Value)
                 .HasPrecision(18, 2);
 
+
+
+
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             // Seed user roles
             modelBuilder.Entity<UserRole>().HasData(
@@ -72,6 +77,7 @@ namespace car_system.Controllers.Data
         public DbSet<Offers> Offers { get; set; }
 
         public DbSet<Damages> Damages { get; set; }
+
     }
 }
 
