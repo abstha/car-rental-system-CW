@@ -47,43 +47,43 @@ namespace car_system.Controllers.Data
                     context.SaveChanges();
                 }
                 // Admin User
-                var adminUser = new Users()
-                {
-                    UserName = "admin@gmail.com",
-                    Email = "admin@gmail.com",
-                    Name = "Admin Abhinav",
-                    Phone = "1234567890",
-                    Address = "Patan"
-                };
+                //var adminUser = new Users()
+                //{
+                //    UserName = "admin@gmail.com",
+                //    Email = "admin@gmail.com",
+                //    Name = "Admin Abhinav",
+                //    Phone = "1234567890",
+                //    Address = "Patan"
+                //};
 
-                // Use a password hasher to create a hashed password for the admin user
-                var passwordHasher = new PasswordHasher<Users>();
-                adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin1!");
+                //// Use a password hasher to create a hashed password for the admin user
+                //var passwordHasher = new PasswordHasher<Users>();
+                //adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin1!");
 
-                // Add the admin user to the context
-                context.Users.Add(adminUser);
+                //// Add the admin user to the context
+                //context.Users.Add(adminUser);
 
-                // Save the changes to the database
-                context.SaveChanges();
+                //// Save the changes to the database
+                //context.SaveChanges();
 
-                // Find the admin role by its name ("Admin" in this case)
-                var adminRole = context.Roles.FirstOrDefault(r => r.Name == "Admin");
+                //// Find the admin role by its name ("Admin" in this case)
+                //var adminRole = context.Roles.FirstOrDefault(r => r.Name == "Admin");
 
-                // If the admin role exists, assign it to the admin user
-                if (adminRole != null)
-                {
-                    adminUser.Roles = new List<IdentityUserRole<string>>()
-                    {
-                        new IdentityUserRole<string>()
-                        {
-                            RoleId = adminRole.Id,
-                            UserId = adminUser.Id
-                        }
-                    };
-                }
+                //// If the admin role exists, assign it to the admin user
+                //if (adminRole != null)
+                //{
+                //    adminUser.Roles = new List<IdentityUserRole<string>>()
+                //    {
+                //        new IdentityUserRole<string>()
+                //        {
+                //            RoleId = adminRole.Id,
+                //            UserId = adminUser.Id
+                //        }
+                //    };
+                //}
 
-                // Save the changes to the database
-                context.SaveChanges();
+                //// Save the changes to the database
+                //context.SaveChanges();
 
             }
 

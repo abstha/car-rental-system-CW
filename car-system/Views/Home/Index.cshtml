@@ -1,5 +1,5 @@
 ﻿@using car_system.Models.Entities
-@model List<Cars>
+@model IndexViewModel
 @{
     ViewData["Title"] = "Home Page";
     var userId = Context.Session.GetString("UserId");
@@ -53,9 +53,41 @@
                 <input type="search" name="" id="" placeholder="Search here..." />
             </div>
             <div>
-                <a href="/Account/Login"><button class="home-signin-btn" type="submit">Login</button></a>
-                <a href="/Account/Register"><button class="home-signup-btn" type="submit">Register</button></a>
+                @if (string.IsNullOrEmpty(userId))
+                {
+                    <div>
+                        <a href="/Account/Login"><button class="home-signin-btn" type="submit">Login</button></a>
+                        <a href="/Account/Register"><button class="home-signup-btn" type="submit">Register</button></a>
+                    </div>
+                }
+                else
+                {
+                    <!-- Render other content for logged-in users -->
+                    <!-- Example: Display the user's name or profile picture -->
+                    @*<div>
+                        <span>Welcome, John Doe!</span>
+                        <!-- Additional logged-in user options or actions -->
+                    </div>*@
+
+                    <div class="icon" onclick="toggleNotifi()">
+                        <img src="/Images/bell.png" alt=""> <span>9</span>
+                    </div>
+                    <div class="notifi-box" id="box">
+    <h2>Notifications <span>@Model.Offers.Count</span></h2>
+    @foreach (var offer in Model.Offers)
+    {
+        <div class="notifi-item">
+            <img src="/Images/avatar1.png" alt="img">
+            <div class="text">
+                <h4>@offer.OfferDescription</h4>
+                <p>@offer.Value</p>
             </div>
+        </div>
+    }
+</div>
+                }
+            </div>
+            
         </div>
     </header>
 
@@ -89,7 +121,7 @@
 
         <div class="cars-container container1">
                 <!-- Your existing HTML code for the car cards -->
-                @foreach (var car in Model)
+                @foreach (var car in Model.Cars)
                 {
                 <div class="product-card" data-car-id="@car.CarId">
                         <!-- Car details -->
@@ -113,8 +145,18 @@
                                 <p class="description">@car.Availability</p>
                             </div>
                         </div>
-                        <!-- Rent button -->
+                    @if (string.IsNullOrEmpty(userId))
+                    {
+                        <!-- User not logged in, display login button -->
+                        <a href="/Account/Login">
+                            <button type="button" class="rent-button">Login to Rent</button>
+                        </a>
+                    }
+                    else
+                    {
+                        <!-- User logged in, display rent button -->
                         <button type="button" class="rent-button">Rent Now</button>
+                    }
                     </div>
                 }
         </div>
@@ -292,5 +334,22 @@
             }
         });
     });
+</script>
+<script>
+    var box = document.getElementById('box');
+    var down = false;
+
+
+    function toggleNotifi() {
+        if (down) {
+            box.style.height = '0px';
+            box.style.opacity = 0;
+            down = false;
+        } else {
+            box.style.height = '510px';
+            box.style.opacity = 1;
+            down = true;
+        }
+    }
 </script>
 </html>

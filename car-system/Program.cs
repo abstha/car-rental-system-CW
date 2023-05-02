@@ -21,6 +21,7 @@ builder.Services.AddScoped<IRentalService, RentalService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IDamageService, DamageService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
+//builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 
 
 builder.Services.AddIdentity<Users, UserRole>()

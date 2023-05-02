@@ -29,10 +29,15 @@ namespace car_system.Controllers
         public IActionResult Index()
         {
             var cars = _homeService.GetAllCars();
+            var offers = _offerService.GetAllOffers();
 
-            // TODO: Pass the cars data to the view
+            var viewModel = new IndexViewModel
+            {
+                Cars = cars,
+                Offers = offers
+            };
 
-            return View(cars);
+            return View(viewModel);
         }
 
         public IActionResult AdminCar()
@@ -134,6 +139,17 @@ namespace car_system.Controllers
 
             // Pass the rental requests data to the view
             return View(rentalRequestList);
+        }
+
+        public async Task<IActionResult> AdminSales()
+        {
+            // Retrieve the RentalRequest records from the database
+            var rentalRequests = await _rentalService.GetAllRentalRequests();
+
+            // Sort the rentalRequests list by RentalDate in ascending order
+            rentalRequests = rentalRequests.OrderBy(r => r.RentalDate).ToList();
+
+            return View(rentalRequests);
         }
     }
 }
