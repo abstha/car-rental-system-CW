@@ -8,6 +8,8 @@ namespace car_system.Models.Entities
         public string Phone { get; set; }
         public string Address { get; set; }
 
+        public bool IsRegular { get; set; }
+
         // Navigation properties
         public virtual ICollection<RentalRequest> RentalRequests { get; set; }
         public virtual ICollection<Attachment> Attachments { get; set; }

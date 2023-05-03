@@ -161,7 +161,7 @@
 				</div>
 				<div class="tbl-content">
 					<table cellpadding="0" cellspacing="0" border="0">
-						<tbody>
+							<tbody id="salesTableBody">
 							@foreach (var request in Model)
 							{
 								<tr>
@@ -177,11 +177,53 @@
 						</tbody>
 					</table>
 				</div>
+
+				<div class="filter-section">
+					<label for="month-select">Select Month:</label>
+					<select id="month-select" onchange="filterSalesByMonth(this.value)">
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
+
+						<!-- Add options for other months -->
+					</select>
+				</div>
 			</div>
 		</div>
 	</div>
 	</div>
 
 	<script src="./index.js"></script>
+	<script>
+		function filterSalesByMonth(selectedMonth) {
+			var tableRows = document.querySelectorAll("#salesTableBody tr");
+
+			tableRows.forEach(function (row) {
+				var rentalDate = row.querySelector("td:nth-child(4)").textContent;
+				var dateParts = rentalDate.split(" ")[0].split("/");
+				var month = parseInt(dateParts[0]);
+				var year = parseInt(dateParts[2]);
+
+				// Assuming the selected month format is "January", "February", etc.
+				var selectedMonthIndex = new Date(Date.parse(selectedMonth + " 1, 2000")).getMonth() + 1;
+
+				if (month === selectedMonthIndex) {
+					row.style.display = "table-row";
+				} else {
+					row.style.display = "none";
+				}
+			});
+		}
+	</script>
 </body>
+
 </html>
