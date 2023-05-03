@@ -23,6 +23,12 @@ namespace car_system.Controllers.Services
                 throw new ArgumentException($"Invalid attachment data: {errorMessages}");
             }
 
+            // Validate the image size
+            if (attachmentDto.CitizenshipImage.Length > 1.5 * 1024 * 1024) // 1.5MB in bytes
+            {
+                throw new ArgumentException("Attachment image size exceeds the limit of 1.5MB.");
+            }
+
             // Create a new Attachment entity from the DTO
             Attachment attachment = new Attachment
             {

@@ -70,7 +70,7 @@
                     </div>*@
 
                     <div class="icon" onclick="toggleNotifi()">
-                        <img src="/Images/bell.png" alt=""> <span>9</span>
+                        <img src="/Images/bell.png" alt=""> <span>@Model.Offers.Count</span>
                     </div>
                     <div class="notifi-box" id="box">
                         <h2>Notifications <span>@Model.Offers.Count</span></h2>
@@ -80,7 +80,7 @@
                                 <img src="/Images/avatar1.png" alt="img">
                                 <div class="text">
                                     <h4>@offer.OfferDescription</h4>
-                                    <p>@offer.Value</p>
+                                    <b>Offer discount:</b><p>@offer.Value %</p>
                                 </div>
                             </div>
                         }
@@ -100,8 +100,8 @@
                 Of <span> Cars </span>
             </h1>
             <p>
-                Lorem ipsum dolor sit amet <br />
-                consectetur adipisicing elit.
+                Our car rental service provides a wide range of   <br />
+                vehicles to choose from for your convenience.
             </p>
             <a href="#" class="home-btn">Discover Now</a>
         </div>
@@ -113,7 +113,7 @@
             <span>All Cars</span>
             <h2>We have all types cars</h2>
             <p>
-                Lorem ipsum dolor sit amet coicing elit. Oint similique. Aspernaturm!
+                Discover our diverse range of vehicles to fit your every need, from compact cars to spacious SUVs!
             </p>
         </div>
 
@@ -154,11 +154,80 @@
                     }
                     else
                     {
-                        <!-- User logged in, display rent button -->
-                        <button type="button" class="rent-button">Rent Now</button>
+                        <a href="#popup-box1">
+                            <button class="buy">
+                                Rent Now
+                            </button>
+                        </a>
+
+                        <div id="popup-box1" class="modal">
+                            <div class="content">
+                                <h1 style="color: black;">
+                                    @car.Model
+                                </h1>
+                                <div class="detail">
+                                    <p class="type" style="color: black;"><i class='bx bx-dollar'></i> &nbsp; Price</p>
+                                    <p class="description" style="color: black;">@car.RentPrice</p>
+                                </div>
+
+                                <div class="pay-detail">
+                                    <p class="pay-type" style="color: black;"><i class='bx bxl-paypal'></i> &nbsp; Payment</p>
+                                    <p class="pay-description" style="color: black;">Please select your payment option:</p>
+                                    <div class="pay-options">
+                                        <label for="cash">
+                                            <input type="radio" id="cash" name="payment" value="cash" required>
+                                            Cash
+                                        </label>
+                                        <label for="online">
+                                            <input type="radio" id="online" name="payment" value="online" required>
+                                            Online
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="detail">
+                                    <p class="type" style="color: black;"><i class='bx bx-dollar'></i> &nbsp; Discounted % </p>
+                                    <p class="description" style="color: black;">10%</p>
+                                </div>
+
+
+                                <div class="detail">
+                                    <p class="type" style="color: black;"><i class='bx bx-dollar'></i> &nbsp; Discounted Price </p>
+                                    <p class="description" style="color: black;">10800</p>
+                                </div>
+
+
+                                <a href="#submit1">
+                                    <button class="rent-button">
+                                        Submit Request
+                                    </button>
+                                </a>
+
+                                <a href="#"
+                           class="box-close">
+                                    ×
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="submit1" class="modal">
+                            <div class="content">
+                                <h1 style="color: black;">
+                                    Request Submit Successful
+                                </h1>
+
+                                <a href="#"
+                           class="box-close">
+                                    ×
+                                </a>
+                            </div>
+                        </div>
                     }
-                    </div>
-                }
+
+
+                </div>
+            }
+
         </div>
     </section>
 
@@ -175,10 +244,7 @@
                 Quality Cars
             </h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-                aspernatur vitae amet perspiciatis reiciendis quae, quis odit atque.
-                Alias qui, dignissimos voluptatem praesentium nam adipisci quasi
-                temporibus quisquam accusantium quibusdam.
+                We provide quality cars at affordable prices with exceptional customer service. Choose from our diverse selection of well-maintained vehicles for your next trip.
             </p>
 
             <!-- About Button -->
@@ -192,8 +258,8 @@
             <span>Blog & News</span>
             <h2>Our Blog Content</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                assumenda iste molestiae
+
+                Get the latest news and insights on car rentals and travel from our informative blog.
             </p>
         </div>
 
@@ -205,10 +271,10 @@
                 <span>Feb 14 2021</span>
                 <h3>How to Get Perfect Car At Low Price</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                    veritatis iure officiis delectus aliquid sunt cupiditate officia
-                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
-                    porro nisi? Commodi, dignissimos.
+                    Discover how to find the perfect car rental at an affordable price with our
+                    expert tips and advice. From comparing prices to booking in advance,
+                    we'll help you get the most value for your money. Don't miss out on our insider knowledge for finding the best deals on quality rentals of your choice.
+
                 </p>
                 <a href="#" class="blog-btn">
                     Read More<i class="bx bx-right-arrow-alt"></i>
@@ -221,10 +287,10 @@
                 <span>Feb 14 2021</span>
                 <h3>How to Get Perfect Car At Low Price</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                    veritatis iure officiis delectus aliquid sunt cupiditate officia
-                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
-                    porro nisi? Commodi, dignissimos.
+                    Learn how to score the best rental car deals without breaking the bank with our helpful
+                    guide. From choosing the right time to rent to taking advantage of discount codes, we'll share
+                    insider tips on how to get a quality vehicle at a low price. Don't miss out on our expert advice
+                    for finding the perfect car rental to suit your needs and budget.
                 </p>
                 <a href="#" class="blog-btn">
                     Read More<i class="bx bx-right-arrow-alt"></i>
@@ -237,10 +303,9 @@
                 <span>Feb 14 2021</span>
                 <h3>How to Get Perfect Car At Low Price</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                    veritatis iure officiis delectus aliquid sunt cupiditate officia
-                    cum, deleniti sequi esse nulla, voluptas error dignissimos iste
-                    porro nisi? Commodi, dignissimos.
+                    Looking for ways to save money on your next car rental? Our guide provides practical advice on how to
+                    find the perfect vehicle at an affordable price. With tips on everything from comparing rates to leveraging
+                    loyalty programs, we'll help you get the most value for your rental budget.
                 </p>
                 <a href="#" class="blog-btn">
                     Read More<i class="bx bx-right-arrow-alt"></i>

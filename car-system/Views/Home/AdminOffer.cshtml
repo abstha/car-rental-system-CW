@@ -48,25 +48,19 @@
 		<div class="navcontainer">
 			<nav class="nav">
 				<div class="nav-upper-options">
+						<a href="/Home/AdminStaff">
+							<div class="nav-option option1">
+								<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
+								<h3> Staffs</h3>
+							</div>
+						</a>
 
-					@if(User.IsInRole("Admin"))
-        {
-            <a href="/Home/AdminStaff">
-                <div class="nav-option option1">
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
-                    <h3> Staffs</h3>
-                </div>
-            </a>
-
-            <a href="/Home/AddStaff">
-                <div class="nav-option option3" style="text-decoration: none;">
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png" class="nav-img" alt="articles">
-                    <h3> Add Staff</h3>
-                </div>
-            </a>
-        }
-
-
+						<a href="/Home/AddStaff">
+							<div class="nav-option option3" style="text-decoration: none;">
+								<img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png" class="nav-img" alt="articles">
+								<h3> Add Staff</h3>
+							</div>
+						</a>
 
 
 					<a href="/Home/AdminCar">
@@ -143,7 +137,7 @@
                         eiusmod tempor incididunt.
                     </p>
                 </div>
-				<form asp-controller="Offer" asp-action="CreateOffer" method="post" id="createOfferForm">
+				<form asp-controller="Offer" asp-action="CreateOffer" method="post" id="createOfferForm" onsubmit="event.preventDefault(); submitForm();">
 					<div class="formbold-input-flex">
 						<div>
 							<label for="startDate" class="formbold-form-label">From</label>
@@ -182,18 +176,26 @@
 </body>
 
 <script>
-	const form = document.getElementById("createOfferForm");
-
-	form.addEventListener("submit", function (event) {
-		event.preventDefault(); // Prevent default form submission
-
+	function submitForm() {
 		// Collect form data
-		const formData = new FormData(form);
+		const formData = new FormData(document.getElementById("createOfferForm"));
+
+		// Create an object to hold the form data
+		const offerData = {
+			startDate: formData.get("StartDate"),
+			endDate: formData.get("EndDate"),
+			value: formData.get("Value"),
+			offerDescription: formData.get("OfferDescription"),
+			createdByUserID: formData.get("CreatedByUserID")
+		};
 
 		// Send a POST request to the API endpoint
 		fetch('https://localhost:7043/api/offer', {
 			method: "POST",
-			body: formData
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(offerData)
 		})
 			.then(response => {
 				if (response.ok) {
@@ -210,6 +212,6 @@
 				console.error("Failed to create offer:", error);
 				// Handle the error or display a message to the user
 			});
-	});
+	}
 </script>
 </html>

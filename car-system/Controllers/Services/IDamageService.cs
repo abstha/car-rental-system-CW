@@ -9,5 +9,6 @@ namespace car_system.Controllers.Services
         void DeleteDamage(int damageId);
         Damages GetDamageById(int damageId);
         List<Damages> GetAllDamages();
+
     }
 }

@@ -43,5 +43,6 @@ namespace car_system.Controllers.Services
         {
             return _dbContext.Damages.ToList();
         }
+
     }
 }
