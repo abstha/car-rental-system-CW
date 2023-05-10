@@ -15,8 +15,9 @@ namespace car_system.Controllers
         private readonly IOfferService _offerService;
         private readonly ICarService _carService;
         private readonly IRentalService _rentalService;
+        private readonly IDamageService _damageService;
 
-        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager, IOfferService offerService, ICarService carService, IRentalService rentalService)
+        public HomeController(IHomeService homeService, UserManager<Users> userManager, RoleManager<UserRole> roleManager, IOfferService offerService, ICarService carService, IRentalService rentalService, IDamageService damageService)
         {
             _homeService = homeService;
             _userManager = userManager;
@@ -24,6 +25,7 @@ namespace car_system.Controllers
             _offerService = offerService;
             _carService = carService;
             _rentalService = rentalService;
+            _damageService = damageService;
 
         }
         public IActionResult Index()
@@ -38,6 +40,12 @@ namespace car_system.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public IActionResult AdminDamage()
+        {
+            var damages = _damageService.GetAllDamages();
+            return View(damages);
         }
 
         public IActionResult AdminCar()

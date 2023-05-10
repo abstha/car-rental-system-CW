@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using car_system.Models.Entities
+@model List<Damages>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +13,7 @@
 				initial-scale=1.0">
 	<title>Admin</title>
 	<link rel="stylesheet"
-		  href="~/css/adminStaff.css">
+		  href="~/css/adminCar.css">
 	<link rel="stylesheet"
 		  href="responsive.css">
 </head>
@@ -42,7 +45,6 @@
 		<div class="navcontainer">
 			<nav class="nav">
 				<div class="nav-upper-options">
-
 
 					<a href="/Home/AdminStaff">
 						<div class="nav-option option1">
@@ -149,48 +151,49 @@
 			</nav>
 		</div>
 		<div class="main">
-
-
-
 			<div class="report-container">
 				<div class="report-header">
-					<h1 class="recent-Articles">Staffs</h1>
-					<button class="view">View All</button>
 				</div>
+
 
 				<div class="report-body">
-					<div class="report-topic-heading">
-						<h3 class="t-op">Staff ID</h3>
-						<h3 class="t-op">Name</h3>
-						<h3 class="t-op">Email</h3>
-						<h3 class="t-op">Phone</h3>
-						<h3 class="t-op">Address</h3>
-						<h3 class="t-op">Action</h3>
+					<div class="tbl-header">
+						<table cellpadding="0" cellspacing="0" border="0">
+							<thead>
+								<tr>
+									<th>Damage ID</th>
+									<th>Car Damaged</th>
+									<th>Damaged by</th>
+									<th>Damage charge</th>
+									<th class="action">Action</th>
+									<th></th>
+								</tr>
+							</thead>
+						</table>
 					</div>
-
-					<div class="items">
-						@foreach (var staffMember in Model)
-						{
-							<div class="item1">
-								<h3 class="t-op-nextlvl">@staffMember.Id</h3>
-								<h3 class="t-op-nextlvl">@staffMember.Name</h3>
-								<h3 class="t-op-nextlvl">@staffMember.Email</h3>
-								<h3 class="t-op-nextlvl">@staffMember.PhoneNumber</h3>
-								<h3 class="t-op-nextlvl">@staffMember.Address</h3>
-								<td>
-									<button class="btnUpdate">Update <i class="fa-solid fa-user-pen"></i></button>
-								</td>
-								<td>
-									<button class="btnDelete">Delete <i class="fa-solid fa-user-slash"></i></button>
-								</td>
-							</div>
-						}
+					<div class="tbl-content">
+						<table cellpadding="0" cellspacing="0" border="0">
+							<tbody>
+								@foreach (var damage in Model)
+								{
+									<tr>
+										<td>@damage.DamageID</td>
+										<td>@damage.CarID</td>
+										<td>@damage.UserID</td>
+										<td>@damage.Amount</td>
+										<td>
+											<button class="btnUpdate">Update <i class="fa-solid fa-user-pen"></i></button>
+										</td>
+										<td>
+											<button class="btnDelete">Delete <i class="fa-solid fa-user-slash"></i></button>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
 					</div>
 				</div>
-
-
 			</div>
-			<a href="addStaff.html"><button class="view" style="margin-left: 90%">Add Staff <i class="fa-solid fa-user-plus"></i></button></a>
 		</div>
 	</div>
 

@@ -155,11 +155,10 @@
                     else
                     {
                         <a href="#popup-box1">
-                            <button class="buy">
+                            <button class="buy" onclick="openPopup('@car.Model', '@car.RentPrice')">
                                 Rent Now
                             </button>
                         </a>
-
                         <div id="popup-box1" class="modal">
                             <div class="content">
                                 <h1 style="color: black;">
@@ -193,7 +192,7 @@
 
                                 <div class="detail">
                                     <p class="type" style="color: black;"><i class='bx bx-dollar'></i> &nbsp; Discounted Price </p>
-                                    <p class="description" style="color: black;">10800</p>
+                                    <p class="description" style="color: black;"><span id="discounted-price"></span></p>
                                 </div>
 
 
@@ -334,6 +333,7 @@
                 <a href="#">Cars</a>
                 <a href="#">Parts</a>
                 <a href="#">Sales</a>
+                <a href="../Damage/CreateDamage"> Submit damage form</a>
             </div>
 
             <div class="footer-box">
@@ -417,6 +417,32 @@
         }
     }
 </script>
+<script>
+    function openPopup(model, price) {
+        var popup = document.getElementById("popup-box1");
+
+        // Populate the popup with the selected car's details
+        var modelElement = popup.querySelector(".content h1");
+        var priceElement = popup.querySelector(".content .detail .description");
+        var discountedPriceElement = popup.querySelector(".content .discounted-price .description");
+
+        // Calculate the discounted price
+        var rentPrice = parseFloat(price);
+        var discountPercentage = 10;
+        var discountedPrice = rentPrice - (rentPrice * discountPercentage / 100);
+
+        // Set the values in the popup
+        modelElement.textContent = model;
+        priceElement.textContent = price;
+        var discountedPriceElement = popup.querySelector("#discounted-price");
+        discountedPriceElement.textContent = "$" + discountedPrice.toFixed(2);
+
+        // Open the popup
+        popup.style.display = "block";
+    }
+</script>
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(".home-body").slick({

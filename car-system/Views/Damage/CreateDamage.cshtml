@@ -1,0 +1,114 @@
+﻿@model DamageView
+@{
+    ViewData["Title"] = "Home Page";
+    var userId = Context.Session.GetString("UserId");
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hello</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link rel="stylesheet" type="text/css" href="~/css/homepage.css" />
+
+    @*<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />*@
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <!-- Nav Container -->
+        <div class="nav container1">
+            <!-- Menu Icon -->
+            <i class="bx bx-menu" id="menu-icon"></i>
+            <!-- Logo -->
+            <a href="#" class="logo">Hajur ko <span>car rental</span></a>
+            <!-- Nav List -->
+            <ul class="navbar">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#blog">Our Blog</a></li>
+            </ul>
+
+            <!-- Search Icon -->
+            <i class="bx bx-search" id="search-icon"></i>
+            <!-- Search Box -->
+            <div class="search-box container1">
+                <input type="search" name="" id="" placeholder="Search here..." />
+            </div>
+            <div>
+                @if (string.IsNullOrEmpty(userId))
+                {
+                    <div>
+                        <a href="/Account/Login"><button class="home-signin-btn" type="submit">Login</button></a>
+                        <a href="/Account/Register"><button class="home-signup-btn" type="submit">Register</button></a>
+                    </div>
+                }
+                else
+                {
+                    <!-- Render other content for logged-in users -->
+                    <!-- Example: Display the user's name or profile picture -->
+                    @*<div>
+                <span>Welcome, John Doe!</span>
+                <!-- Additional logged-in user options or actions -->
+                </div>*@
+@*
+                    <div class="icon" onclick="toggleNotifi()">
+                        <img src="/Images/bell.png" alt=""> <span>@Model.Offers.Count</span>
+                    </div>
+                    <div class="notifi-box" id="box">
+                        <h2>Notifications <span>@Model.Offers.Count</span></h2>
+                        @foreach (var offer in Model.Offers)
+                        {
+                            <div class="notifi-item">
+                                <img src="/Images/avatar1.png" alt="img">
+                                <div class="text">
+                                    <h4>@offer.OfferDescription</h4>
+                                    <b>Offer discount:</b><p>@offer.Value %</p>
+                                </div>
+                            </div>
+                        }
+                    </div>*@
+                }
+            </div>
+
+        </div>
+    </header>
+    <h1>Create Damage</h1>
+
+    <form asp-action="CreateDamage" method="post">
+        <div class="form-group">
+            <label for="UserID">User ID:</label>
+            <input type="text" class="form-control" id="UserID" name="UserID" value="@Model.UserID" required>
+        </div>
+        <div class="form-group">
+            <label for="VerifiedBy">Verified By:</label>
+            <input type="text" class="form-control" id="VerifiedBy" name="VerifiedBy" value="@Model.VerifiedBy" required>
+        </div>
+        <div class="form-group">
+            <label for="CarId">Car ID:</label>
+            <input type="text" class="form-control" id="CarId" name="CarId" value="@Model.CarId" required>
+        </div>
+        <div class="form-group">
+            <label for="Amount">Amount:</label>
+            <input type="text" class="form-control" id="Amount" name="Amount" value="@Model.Amount" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</body>
+</html>

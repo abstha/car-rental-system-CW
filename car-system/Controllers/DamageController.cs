@@ -40,6 +40,13 @@ namespace car_system.Controllers
             return View(damage);
         }
 
+        // GET: /Damages/CreateDamage
+        [HttpGet]
+        public IActionResult CreateDamage()
+        {
+            return View();
+        }
+
         // POST: api/damages
         [HttpPost]
 
